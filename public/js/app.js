@@ -2128,25 +2128,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editmode: false,
-      todos: '',
+      quests: '',
       form: new Form({
         title: ''
       })
     };
   },
   methods: {
-    deleteTodo: function deleteTodo(e) {
+    deleteQuest: function deleteQuest(e) {
       var _this = this;
 
       var data = new FormData();
       data.append('_method', 'DELETE');
       axios.post('/api/quest/' + e.id, data).then(function (res) {
-        _this.todos = res.data;
+        _this.quests = res.data;
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
       });
     },
-    updateTodo: function updateTodo(e) {
+    updateQuest: function updateQuest(e) {
       var _this2 = this;
 
       this.editmode = false;
@@ -2157,7 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.form.errors.record(error.response.data.errors);
       });
     },
-    toggleTodo: function toggleTodo(e) {
+    toggleQuest: function toggleQuest(e) {
       e.completed = !e.completed;
       var data = new FormData();
       data.append('_method', 'PATCH');
@@ -2172,11 +2172,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/quest/' + e.id, data);
     },
-    getTodos: function getTodos() {
+    getQuests: function getQuests() {
       var _this3 = this;
 
       axios.get('/api/quest').then(function (res) {
-        _this3.todos = res.data;
+        _this3.quests = res.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2189,14 +2189,14 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/quest', data).then(function (res) {
         _this4.form.reset();
 
-        _this4.getTodos();
+        _this4.getquests();
       })["catch"](function (error) {
         _this4.form.errors.record(error.response.data.errors);
       });
     }
   },
   mounted: function mounted() {
-    this.getTodos();
+    this.getQuests();
   }
 });
 
@@ -38057,18 +38057,18 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "w-100 todo" },
-      _vm._l(_vm.todos, function(todo) {
+      { staticClass: "w-100 quest" },
+      _vm._l(_vm.quests, function(quest) {
         return _c(
           "div",
           {
-            key: todo.id,
+            key: quest.id,
             staticClass:
               "w-100 d-flex align-items-center p-3 bg-white border-bottom"
           },
           [
             _c("span", { staticClass: "mr-2" }, [
-              todo.completed == false
+              quest.completed == false
                 ? _c(
                     "svg",
                     {
@@ -38086,7 +38086,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.toggleTodo(todo)
+                          return _vm.toggleQuest(quest)
                         }
                       }
                     },
@@ -38100,7 +38100,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              todo.completed == true
+              quest.completed == true
                 ? _c(
                     "svg",
                     {
@@ -38118,7 +38118,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.toggleTodo(todo)
+                          return _vm.toggleQuest(quest)
                         }
                       }
                     },
@@ -38136,27 +38136,27 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "font-weight-bolder" }, [
-              _vm.editmode == false || _vm.editmode != todo.id
-                ? _c("span", [_vm._v(_vm._s(todo.title))])
+              _vm.editmode == false || _vm.editmode != quest.id
+                ? _c("span", [_vm._v(_vm._s(quest.title))])
                 : _vm._e(),
-              _vm.editmode == todo.id
+              _vm.editmode == quest.id
                 ? _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: todo.title,
-                        expression: "todo.title"
+                        value: quest.title,
+                        expression: "quest.title"
                       }
                     ],
                     attrs: { type: "text" },
-                    domProps: { value: todo.title },
+                    domProps: { value: quest.title },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(todo, "title", $event.target.value)
+                        _vm.$set(quest, "title", $event.target.value)
                       }
                     }
                   })
@@ -38168,7 +38168,7 @@ var render = function() {
               { staticClass: "ml-auto mr-2 d-flex align-items-center" },
               [
                 _c("span", [
-                  _vm.editmode != todo.id
+                  _vm.editmode != quest.id
                     ? _c(
                         "svg",
                         {
@@ -38186,7 +38186,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.editmode = todo.id
+                              _vm.editmode = quest.id
                             }
                           }
                         },
@@ -38216,7 +38216,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.editmode == todo.id
+                  _vm.editmode == quest.id
                     ? _c(
                         "svg",
                         {
@@ -38234,7 +38234,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.updateTodo(todo)
+                              return _vm.updateQuest(quest)
                             }
                           }
                         },
@@ -38276,7 +38276,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.deleteTodo(todo)
+                          return _vm.deleteQuest(quest)
                         }
                       }
                     },
