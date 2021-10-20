@@ -16,7 +16,8 @@ class CreateQuestsTable extends Migration
         Schema::create('quests', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->boolean('completed')->default(0);
+            $table->string('description')->default('');
+            $table->bigInteger('quest_status_id')->unsigned()->default(1);
             $table->timestamps();
         });
     }
