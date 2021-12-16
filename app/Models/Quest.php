@@ -9,5 +9,9 @@ class Quest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'completed'];
+    protected $fillable = ['title', 'quest_status_id', 'description'];
+
+    public function questStatus(){
+        return $this->belongsTo('App\Models\QuestStatus');
+    }
 }

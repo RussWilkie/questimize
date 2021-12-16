@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quest;
 use Illuminate\Http\Request;
+use App\Models\QuestStatus;
 
 class QuestController extends Controller
 {
@@ -14,7 +15,7 @@ class QuestController extends Controller
      */
     public function index()
     {
-        return Quest::latest()->get();
+        return Quest::with('questStatus')->latest()->get();
     }
 
     /**
@@ -80,6 +81,11 @@ class QuestController extends Controller
         
         $quest = Quest::findOrFail($id);
         $quest->update($request->all());
+        $statusName = $request->quest_status['name'];
+        if(!is_null($statusName)){
+            $statusRow = QuestStatus::where('name', '=', $statusName)->first();
+            $quest->quest_status_id = $statusRow->id;
+        }
         $quest->save();
     }
 

@@ -2124,6 +2124,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2142,6 +2152,8 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'DELETE');
       axios.post('/api/quest/' + e.id, data).then(function (res) {
         _this.quests = res.data;
+
+        _this.getQuests();
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
       });
@@ -2158,25 +2170,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toggleQuest: function toggleQuest(e) {
-      e.completed = !e.completed;
+      // e.completed = !e.completed
+      console.log('quest status');
+      console.log(JSON.stringify(e.quest_status));
       var data = new FormData();
       data.append('_method', 'PATCH');
 
-      if (e.completed == true) {
-        data.append('completed', 1);
+      if (e.quest_status.name == 'Not Started') {
+        console.log('hit not started');
+        data.append('quest_status[name]', 'In-Progress');
       }
 
-      if (e.completed == false) {
-        data.append('completed', 0);
+      if (e.quest_status.name == 'In-Progress') {
+        console.log('In progress');
+        data.append('quest_status[name]', 'Completed');
+      }
+
+      if (e.quest_status.name == 'Completed') {
+        console.log('Completed');
+        data.append('quest_status[name]', 'Not Started');
       }
 
       axios.post('/api/quest/' + e.id, data);
+      this.getQuests();
     },
     getQuests: function getQuests() {
       var _this3 = this;
 
       axios.get('/api/quest').then(function (res) {
         _this3.quests = res.data;
+        console.log(JSON.stringify(_this3.quests));
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2189,7 +2212,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/quest', data).then(function (res) {
         _this4.form.reset();
 
-        _this4.getquests();
+        _this4.getQuests();
       })["catch"](function (error) {
         _this4.form.errors.record(error.response.data.errors);
       });
@@ -38068,7 +38091,7 @@ var render = function() {
           },
           [
             _c("span", { staticClass: "mr-2" }, [
-              quest.completed == false
+              quest.quest_status.name == "Not Started"
                 ? _c(
                     "svg",
                     {
@@ -38079,7 +38102,7 @@ var render = function() {
                         height: "36",
                         viewBox: "0 0 24 24",
                         "stroke-width": "1.5",
-                        stroke: "#FFC107",
+                        stroke: quest.quest_status.color_hex_code,
                         fill: "none",
                         "stroke-linecap": "round",
                         "stroke-linejoin": "round"
@@ -38100,7 +38123,60 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              quest.completed == true
+              quest.quest_status.name == "In-Progress"
+                ? _c(
+                    "svg",
+                    {
+                      staticClass: "icon icon-tabler icon-tabler-blur",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "36",
+                        height: "36",
+                        viewBox: "0 0 24 24",
+                        "stroke-width": "1.5",
+                        stroke: quest.quest_status.color_hex_code,
+                        fill: "none",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleQuest(quest)
+                        }
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          stroke: "none",
+                          d: "M0 0h24v24H0z",
+                          fill: "none"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 3v17" } }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 12h9" } }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 9h8" } }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 6h6" } }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 18h6" } }),
+                      _vm._v(" "),
+                      _c("path", { attrs: { d: "M12 15h8" } })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              quest.quest_status.name == "Completed"
                 ? _c(
                     "svg",
                     {

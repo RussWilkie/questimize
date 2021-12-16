@@ -13,11 +13,21 @@
         <div class="w-100 quest">
             <div v-for="quest in quests" :key="quest.id" class="w-100 d-flex align-items-center p-3 bg-white border-bottom">
                 <span class="mr-2">
-                <svg v-on:click="toggleQuest(quest)" v-if="quest.completed == false" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg v-on:click="toggleQuest(quest)" v-if="quest.quest_status.name == 'Not Started'" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" :stroke="quest.quest_status.color_hex_code" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z"/>
                     <circle cx="12" cy="12" r="9" />
             </svg> 
-            <svg v-if="quest.completed == true" v-on:click="toggleQuest(quest)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg v-on:click="toggleQuest(quest)"  v-if="quest.quest_status.name == 'In-Progress'" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-blur" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" :stroke="quest.quest_status.color_hex_code" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z" />
+                <path d="M12 3v17" />
+                <path d="M12 12h9" />
+                <path d="M12 9h8" />
+                <path d="M12 6h6" />
+                <path d="M12 18h6" />
+                <path d="M12 15h8" />
+                </svg>
+            <svg v-on:click="toggleQuest(quest)" v-if="quest.quest_status.name == 'Completed'" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z"/>
             <circle cx="12" cy="12" r="9" />
             <path d="M9 12l2 2l4 -4" />
@@ -74,6 +84,7 @@
                 data.append('_method', 'DELETE')
                 axios.post('/api/quest/'+e.id, data).then((res) =>{
                     this.quests = res.data
+                    this.getQuests();
                 }).catch((error) => {
                     this.form.errors.record(error.response.data.errors)
                 })
@@ -90,20 +101,31 @@
             },
 
             toggleQuest(e){
-                e.completed = !e.completed
+                
+                // e.completed = !e.completed
+                console.log('quest status');
+                console.log(JSON.stringify(e.quest_status));
                 let data = new FormData();
                 data.append('_method', 'PATCH')
-                if(e.completed == true){
-                    data.append('completed', 1);
+                if(e.quest_status.name == 'Not Started'){
+                    console.log('hit not started');
+                    data.append('quest_status[name]', 'In-Progress');
                 }
-                if(e.completed == false){
-                    data.append('completed', 0)
+                if(e.quest_status.name == 'In-Progress'){
+                      console.log('In progress');
+                    data.append('quest_status[name]', 'Completed');
+                }
+                if(e.quest_status.name == 'Completed'){
+                      console.log('Completed');
+                    data.append('quest_status[name]', 'Not Started');
                 }
                 axios.post('/api/quest/'+e.id, data)
+                this.getQuests();
             },
             getQuests(){
                     axios.get('/api/quest').then((res) =>{
                         this.quests = res.data
+                        console.log(JSON.stringify(this.quests));
                     }).catch((error) =>{
                         console.log(error)
                     })
@@ -114,7 +136,7 @@
                 data.append('title', this.form.title)
                 axios.post('/api/quest', data).then((res) =>{
                     this.form.reset()
-                     this.getquests()
+                     this.getQuests()
                 }).catch((error) => {
                     this.form.errors.record(error.response.data.errors)
                 })
