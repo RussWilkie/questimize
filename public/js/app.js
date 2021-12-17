@@ -2134,13 +2134,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       editmode: false,
       quests: '',
+      selected: 'Mini-Quest',
       form: new Form({
-        title: ''
+        title: '',
+        categories: [{
+          text: 'Mini-Quest',
+          value: 'Mini-Quest'
+        }, {
+          text: 'Ninja/Assassin',
+          value: 'Ninja/Assasin'
+        }, {
+          text: 'Adventurer',
+          value: 'Adventurer'
+        }, {
+          text: 'Wizard',
+          value: 'Wizard'
+        }, {
+          text: 'Ranger',
+          value: 'Ranger'
+        }, {
+          text: 'Scout',
+          value: 'Scout'
+        }, {
+          text: 'Warrior',
+          value: 'Warrior'
+        }, {
+          text: 'Bard',
+          value: 'Bard'
+        }, {
+          text: 'Jester',
+          value: 'Jester'
+        }, {
+          text: 'Clergy',
+          value: 'Clergy'
+        }, {
+          text: 'Chef',
+          value: 'Chef'
+        }, {
+          text: 'Hero',
+          value: 'Hero'
+        }, {
+          text: 'Master',
+          value: 'Master'
+        }]
       })
     };
   },
@@ -38022,7 +38068,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-25" }, [
+  return _c("div", { staticClass: "w-30" }, [
     _c(
       "form",
       {
@@ -38047,8 +38093,9 @@ var render = function() {
             staticClass: "form-control form-control-lg",
             class: { "is-invalid": _vm.form.errors.has("title") },
             attrs: {
+              placeholder: "Name",
               type: "text",
-              "aria-label": "Recipient's username",
+              "aria-label": "Quest Name",
               "aria-describedby": "button-addon2"
             },
             domProps: { value: _vm.form.title },
@@ -38064,6 +38111,47 @@ var render = function() {
               }
             }
           }),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selected,
+                  expression: "selected"
+                }
+              ],
+              staticClass: "form-control form-control-lg",
+              attrs: { id: "categories", name: "categories" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.form.categories, function(category) {
+              return _c("option", { key: category.value }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(category.text) +
+                    "\n                "
+                )
+              ])
+            }),
+            0
+          ),
           _vm._v(" "),
           _vm._m(0)
         ]),

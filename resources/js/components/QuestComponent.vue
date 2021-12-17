@@ -1,9 +1,14 @@
 <template>
-    <div class="w-25">
+    <div class="w-30">
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-            <input v-model="form.title" :class="{'is-invalid' : form.errors.has('title')}" type="text" class="form-control form-control-lg"  @keydown="form.errors.clear('title')"
-            aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input v-model="form.title" placeholder="Name" :class="{'is-invalid' : form.errors.has('title')}" type="text" class="form-control form-control-lg"  @keydown="form.errors.clear('title')"
+            aria-label="Quest Name" aria-describedby="button-addon2">
+            <select v-model="selected" id="categories" class="form-control form-control-lg" name="categories">
+                <option v-for="category in form.categories" :key="category.value">
+                    {{category.text}}
+                </option>
+            </select>
             <div class="input-group-append">
                 <button class="btn btn-success" type="submit" id="button-addon2">Add this to your list</button>
             </div>
@@ -73,8 +78,24 @@
             return{
                 editmode: false,
                 quests:'',
+                selected: 'Mini-Quest',
                 form: new Form({
                     title: '',
+                    categories: [
+                        {text:'Mini-Quest', value: 'Mini-Quest'},
+                        {text: 'Ninja/Assassin', value: 'Ninja/Assasin'},
+                        {text: 'Adventurer', value: 'Adventurer'},
+                        {text: 'Wizard', value: 'Wizard'},
+                        {text: 'Ranger', value: 'Ranger'},
+                        {text: 'Scout', value: 'Scout'},
+                        {text: 'Warrior', value: 'Warrior'},
+                        {text: 'Bard', value: 'Bard'},
+                        {text: 'Jester', value: 'Jester'},
+                        {text: 'Clergy', value: 'Clergy'},
+                        {text: 'Chef', value: 'Chef'},
+                        {text: 'Hero', value: 'Hero'},
+                        {text: 'Master', value: 'Master'},
+                    ],
                 })
             }
         },

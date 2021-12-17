@@ -20,51 +20,51 @@ class QuestCategoriesTableSeeder extends Seeder
             ),
             array(
                 'id' => 2,
-                'name' => 'Ninja/Assassin Quest',
+                'name' => 'Ninja/Assassin',
             ),
             array(
                 'id' => 3,
-                'names' => 'Adventurer Quest',
+                'names' => 'Adventurer',
             ),
             array(
                 'id' => 4,
-                'name' => 'Wizard Quest',
+                'name' => 'Wizard',
             ),
             array(
                 'id' => 5,
-                'name' => 'Ranger Quest',
+                'name' => 'Ranger',
             ),
             array(
                 'id' => 6,
-                'names' => 'Scout Quest',
+                'names' => 'Scout',
             ),
             array(
                 'id' => 7,
-                'names' => 'Warrior Quests',
+                'names' => 'Warrior',
             ),
             array(
                 'id' => 8,
-                'name' => 'Bard Quest',
+                'name' => 'Bard',
             ),
             array(
                 'id' => 9,
-                'name' => 'Jester Quest',
+                'name' => 'Jester',
             ),
             array(
                 'id' => 10,
-                'names' => 'Clergy Quest',
+                'names' => 'Clergy',
             ),
             array(
                 'id' => 11,
-                'names' => 'Chef Quest',
+                'names' => 'Chef',
             ),
             array(
                 'id' => 12,
-                'names' => 'Hero Quest',
+                'names' => 'Hero',
             ),
             array(
                 'id' => 13,
-                'names' => 'Master Quest',
+                'names' => 'Master',
             ),
         ));
     }
