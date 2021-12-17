@@ -18,6 +18,7 @@ class CreateQuestsTable extends Migration
             $table->string('title');
             $table->string('description')->default('');
             $table->bigInteger('quest_status_id')->unsigned()->default(1);
+            $table->bigInteger('quest_category_id')->unsigned()->default(1);
             $table->timestamps();
         });
     }

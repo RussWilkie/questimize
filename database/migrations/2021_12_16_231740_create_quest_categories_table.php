@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestStatuses extends Migration
+class CreateQuestCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateQuestStatuses extends Migration
      */
     public function up()
     {
-        Schema::create('quest_statuses', function (Blueprint $table) {
+        Schema::create('quest_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('quest_category_id')->unsigned()->default(1);
-            $table->string('color_hex_code');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateQuestStatuses extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quest_statuses');
+        Schema::dropIfExists('quest_categories');
     }
 }
