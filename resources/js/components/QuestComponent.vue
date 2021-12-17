@@ -43,7 +43,8 @@
             </div>
 
             <div class="ml-auto mr-2 d-flex align-items-center"><span>
-    
+    <span v-if="editmode == false || editmode != quest.id">{{quest.quest_category.name}}</span><input v-if="editmode == quest.id"   v-model="quest.title" type="text">
+         
     <svg v-on:click="editmode = quest.id"  v-if="editmode != quest.id" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />

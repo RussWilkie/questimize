@@ -2139,6 +2139,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38332,6 +38333,32 @@ var render = function() {
               { staticClass: "ml-auto mr-2 d-flex align-items-center" },
               [
                 _c("span", [
+                  _vm.editmode == false || _vm.editmode != quest.id
+                    ? _c("span", [_vm._v(_vm._s(quest.quest_category.name))])
+                    : _vm._e(),
+                  _vm.editmode == quest.id
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: quest.title,
+                            expression: "quest.title"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: quest.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(quest, "title", $event.target.value)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.editmode != quest.id
                     ? _c(
                         "svg",
