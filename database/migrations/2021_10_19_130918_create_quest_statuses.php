@@ -16,7 +16,6 @@ class CreateQuestStatuses extends Migration
         Schema::create('quest_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('quest_category_id')->unsigned()->default(1);
             $table->string('color_hex_code');
         });
     }
