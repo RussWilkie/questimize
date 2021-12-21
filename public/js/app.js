@@ -2145,50 +2145,50 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editmode: false,
       quests: '',
-      selected: 'Mini-Quest',
       form: new Form({
         title: '',
-        categories: [{
-          text: 'Mini-Quest',
-          value: 'Mini-Quest'
-        }, {
-          text: 'Ninja/Assassin',
-          value: 'Ninja/Assasin'
-        }, {
-          text: 'Adventurer',
-          value: 'Adventurer'
-        }, {
-          text: 'Wizard',
-          value: 'Wizard'
-        }, {
-          text: 'Ranger',
-          value: 'Ranger'
-        }, {
-          text: 'Scout',
-          value: 'Scout'
-        }, {
-          text: 'Warrior',
-          value: 'Warrior'
-        }, {
-          text: 'Bard',
-          value: 'Bard'
-        }, {
-          text: 'Jester',
-          value: 'Jester'
-        }, {
-          text: 'Clergy',
-          value: 'Clergy'
-        }, {
-          text: 'Chef',
-          value: 'Chef'
-        }, {
-          text: 'Hero',
-          value: 'Hero'
-        }, {
-          text: 'Master',
-          value: 'Master'
-        }]
-      })
+        category: 'Mini-Quest'
+      }),
+      categories: [{
+        text: 'Mini-Quest',
+        value: 'Mini-Quest'
+      }, {
+        text: 'Ninja/Assassin',
+        value: 'Ninja/Assasin'
+      }, {
+        text: 'Adventurer',
+        value: 'Adventurer'
+      }, {
+        text: 'Wizard',
+        value: 'Wizard'
+      }, {
+        text: 'Ranger',
+        value: 'Ranger'
+      }, {
+        text: 'Scout',
+        value: 'Scout'
+      }, {
+        text: 'Warrior',
+        value: 'Warrior'
+      }, {
+        text: 'Bard',
+        value: 'Bard'
+      }, {
+        text: 'Jester',
+        value: 'Jester'
+      }, {
+        text: 'Clergy',
+        value: 'Clergy'
+      }, {
+        text: 'Chef',
+        value: 'Chef'
+      }, {
+        text: 'Hero',
+        value: 'Hero'
+      }, {
+        text: 'Master',
+        value: 'Master'
+      }]
     };
   },
   methods: {
@@ -2217,24 +2217,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toggleQuest: function toggleQuest(e) {
-      // e.completed = !e.completed
-      console.log('quest status');
-      console.log(JSON.stringify(e.quest_status));
       var data = new FormData();
       data.append('_method', 'PATCH');
 
       if (e.quest_status.name == 'Not Started') {
-        console.log('hit not started');
         data.append('quest_status[name]', 'In-Progress');
       }
 
       if (e.quest_status.name == 'In-Progress') {
-        console.log('In progress');
         data.append('quest_status[name]', 'Completed');
       }
 
       if (e.quest_status.name == 'Completed') {
-        console.log('Completed');
         data.append('quest_status[name]', 'Not Started');
       }
 
@@ -2246,7 +2240,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/quest').then(function (res) {
         _this3.quests = res.data;
-        console.log(JSON.stringify(_this3.quests));
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2255,11 +2248,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var data = new FormData();
+      var category = this.form.category;
       data.append('title', this.form.title);
+      data.append('category', category);
       axios.post('/api/quest', data).then(function (res) {
         _this4.form.reset();
 
         _this4.getQuests();
+
+        _this4.form.category = category;
       })["catch"](function (error) {
         _this4.form.errors.record(error.response.data.errors);
       });
@@ -38120,8 +38117,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.selected,
-                  expression: "selected"
+                  value: _vm.form.category,
+                  expression: "form.category"
                 }
               ],
               staticClass: "form-control form-control-lg",
@@ -38136,13 +38133,15 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.selected = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                  _vm.$set(
+                    _vm.form,
+                    "category",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
                 }
               }
             },
-            _vm._l(_vm.form.categories, function(category) {
+            _vm._l(_vm.categories, function(category) {
               return _c("option", { key: category.value }, [
                 _vm._v(
                   "\n                    " +

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quest;
 use Illuminate\Http\Request;
 use App\Models\QuestStatus;
+use App\Models\QuestCategory;
 
 class QuestController extends Controller
 {
@@ -44,7 +45,13 @@ class QuestController extends Controller
             'title.required' => 'Quest input field is required!'
         ]
         );
-        Quest::create($request->all());
+        
+        $data = $request->all();
+        $category = QuestCategory::where('name', '=', $data['category'])->first();
+        $quest = Quest::create($request->all());
+        $quest->questCategory()->associate($category);
+        $quest->save();
+        
     }
 
     /**

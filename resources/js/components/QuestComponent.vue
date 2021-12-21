@@ -4,8 +4,8 @@
             <div class="input-group mb-3 w-100">
             <input v-model="form.title" placeholder="Name" :class="{'is-invalid' : form.errors.has('title')}" type="text" class="form-control form-control-lg"  @keydown="form.errors.clear('title')"
             aria-label="Quest Name" aria-describedby="button-addon2">
-            <select v-model="selected" id="categories" class="form-control form-control-lg" name="categories">
-                <option v-for="category in form.categories" :key="category.value">
+            <select v-model="form.category" id="categories" class="form-control form-control-lg" name="categories">
+                <option v-for="category in categories" :key="category.value">
                     {{category.text}}
                 </option>
             </select>
@@ -79,10 +79,11 @@
             return{
                 editmode: false,
                 quests:'',
-                selected: 'Mini-Quest',
                 form: new Form({
                     title: '',
-                    categories: [
+                    category: 'Mini-Quest',
+                }),
+                categories: [
                         {text:'Mini-Quest', value: 'Mini-Quest'},
                         {text: 'Ninja/Assassin', value: 'Ninja/Assasin'},
                         {text: 'Adventurer', value: 'Adventurer'},
@@ -97,7 +98,6 @@
                         {text: 'Hero', value: 'Hero'},
                         {text: 'Master', value: 'Master'},
                     ],
-                })
             }
         },
         methods:{
@@ -123,22 +123,15 @@
             },
 
             toggleQuest(e){
-                
-                // e.completed = !e.completed
-                console.log('quest status');
-                console.log(JSON.stringify(e.quest_status));
                 let data = new FormData();
                 data.append('_method', 'PATCH')
                 if(e.quest_status.name == 'Not Started'){
-                    console.log('hit not started');
                     data.append('quest_status[name]', 'In-Progress');
                 }
                 if(e.quest_status.name == 'In-Progress'){
-                      console.log('In progress');
                     data.append('quest_status[name]', 'Completed');
                 }
                 if(e.quest_status.name == 'Completed'){
-                      console.log('Completed');
                     data.append('quest_status[name]', 'Not Started');
                 }
                 axios.post('/api/quest/'+e.id, data)
@@ -147,7 +140,6 @@
             getQuests(){
                     axios.get('/api/quest').then((res) =>{
                         this.quests = res.data
-                        console.log(JSON.stringify(this.quests));
                     }).catch((error) =>{
                         console.log(error)
                     })
@@ -155,10 +147,13 @@
 
             saveData(){
                 let data = new FormData();
+                let category = this.form.category;
                 data.append('title', this.form.title)
+                data.append('category', category);
                 axios.post('/api/quest', data).then((res) =>{
                     this.form.reset()
-                     this.getQuests()
+                    this.getQuests()
+                    this.form.category = category;
                 }).catch((error) => {
                     this.form.errors.record(error.response.data.errors)
                 })
