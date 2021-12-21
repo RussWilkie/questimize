@@ -16,7 +16,8 @@ class QuestController extends Controller
      */
     public function index()
     {
-        return Quest::with('questStatus', 'questCategory')->latest()->get();
+        return Quest::with('questStatus', 'questCategory')->orderBy('quest_category_id', 'asc')->get();
+        // return $quests;
     }
 
     /**

@@ -2140,54 +2140,193 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       editmode: false,
-      quests: '',
+      quests: "",
       form: new Form({
-        title: '',
-        category: 'Mini-Quest'
+        title: "",
+        category: "Mini-Quest"
       }),
       categories: [{
-        text: 'Mini-Quest',
-        value: 'Mini-Quest'
+        text: "Mini-Quest",
+        value: "Mini-Quest",
+        rendered: false
       }, {
-        text: 'Ninja/Assassin',
-        value: 'Ninja/Assasin'
+        text: "Ninja/Assassin",
+        value: "Ninja/Assasin",
+        rendered: false
       }, {
-        text: 'Adventurer',
-        value: 'Adventurer'
+        text: "Adventurer",
+        value: "Adventurer",
+        rendered: false
       }, {
-        text: 'Wizard',
-        value: 'Wizard'
+        text: "Wizard",
+        value: "Wizard",
+        rendered: false
       }, {
-        text: 'Ranger',
-        value: 'Ranger'
+        text: "Ranger",
+        value: "Ranger",
+        rendered: false
       }, {
-        text: 'Scout',
-        value: 'Scout'
+        text: "Scout",
+        value: "Scout",
+        rendered: false
       }, {
-        text: 'Warrior',
-        value: 'Warrior'
+        text: "Warrior",
+        value: "Warrior",
+        rendered: false
       }, {
-        text: 'Bard',
-        value: 'Bard'
+        text: "Bard",
+        value: "Bard",
+        rendered: false
       }, {
-        text: 'Jester',
-        value: 'Jester'
+        text: "Jester",
+        value: "Jester",
+        rendered: false
       }, {
-        text: 'Clergy',
-        value: 'Clergy'
+        text: "Clergy",
+        value: "Clergy",
+        rendered: false
       }, {
-        text: 'Chef',
-        value: 'Chef'
+        text: "Chef",
+        value: "Chef",
+        rendered: false
       }, {
-        text: 'Hero',
-        value: 'Hero'
+        text: "Hero",
+        value: "Hero",
+        rendered: false
       }, {
-        text: 'Master',
-        value: 'Master'
+        text: "Master",
+        value: "Master",
+        rendered: false
       }]
     };
   },
@@ -2196,8 +2335,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = new FormData();
-      data.append('_method', 'DELETE');
-      axios.post('/api/quest/' + e.id, data).then(function (res) {
+      data.append("_method", "DELETE");
+      axios.post("/api/quest/" + e.id, data).then(function (res) {
         _this.quests = res.data;
 
         _this.getQuests();
@@ -2210,48 +2349,61 @@ __webpack_require__.r(__webpack_exports__);
 
       this.editmode = false;
       var data = new FormData();
-      data.append('_method', 'PATCH');
-      data.append('title', e.title);
-      axios.post('/api/quest/' + e.id, data)["catch"](function (error) {
+      data.append("_method", "PATCH");
+      data.append("title", e.title);
+      axios.post("/api/quest/" + e.id, data)["catch"](function (error) {
         _this2.form.errors.record(error.response.data.errors);
       });
     },
     toggleQuest: function toggleQuest(e) {
       var data = new FormData();
-      data.append('_method', 'PATCH');
+      data.append("_method", "PATCH");
 
-      if (e.quest_status.name == 'Not Started') {
-        data.append('quest_status[name]', 'In-Progress');
+      if (e.quest_status.name == "Not Started") {
+        data.append("quest_status[name]", "In-Progress");
       }
 
-      if (e.quest_status.name == 'In-Progress') {
-        data.append('quest_status[name]', 'Completed');
+      if (e.quest_status.name == "In-Progress") {
+        data.append("quest_status[name]", "Completed");
       }
 
-      if (e.quest_status.name == 'Completed') {
-        data.append('quest_status[name]', 'Not Started');
+      if (e.quest_status.name == "Completed") {
+        data.append("quest_status[name]", "Not Started");
       }
 
-      axios.post('/api/quest/' + e.id, data);
+      axios.post("/api/quest/" + e.id, data);
       this.getQuests();
     },
     getQuests: function getQuests() {
       var _this3 = this;
 
-      axios.get('/api/quest').then(function (res) {
+      axios.get("/api/quest").then(function (res) {
         _this3.quests = res.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
+    // renderCategory(category) {
+    //   let index = this.categories.findIndex((cat) => cat.text == category);
+    //   if (index == -1) {
+    //     this.$set(this.categories[index], "rendered", false);
+    //   } else {
+    //     if (!this.categories[index].rendered) {
+    //       this.$set(this.categories[index], "rendered", true);
+    //     } else {
+    //       this.$set(this.categories[index], "rendered", false);
+    //     }
+    //   }
+    // return this.categories[index].rendered;
+    // },
     saveData: function saveData() {
       var _this4 = this;
 
       var data = new FormData();
       var category = this.form.category;
-      data.append('title', this.form.title);
-      data.append('category', category);
-      axios.post('/api/quest', data).then(function (res) {
+      data.append("title", this.form.title);
+      data.append("category", category);
+      axios.post("/api/quest", data).then(function (res) {
         _this4.form.reset();
 
         _this4.getQuests();
@@ -38143,11 +38295,7 @@ var render = function() {
             },
             _vm._l(_vm.categories, function(category) {
               return _c("option", { key: category.value }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(category.text) +
-                    "\n                "
-                )
+                _vm._v("\n          " + _vm._s(category.text) + "\n        ")
               ])
             }),
             0
@@ -38170,339 +38318,344 @@ var render = function() {
       "div",
       { staticClass: "w-100 quest" },
       _vm._l(_vm.quests, function(quest) {
-        return _c(
-          "div",
-          {
-            key: quest.id,
-            staticClass:
-              "w-100 d-flex align-items-center p-3 bg-white border-bottom"
-          },
-          [
-            _c("span", { staticClass: "mr-2" }, [
-              quest.quest_status.name == "Not Started"
-                ? _c(
-                    "svg",
-                    {
-                      staticClass: "icon icon-tabler icon-tabler-circle",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "36",
-                        height: "36",
-                        viewBox: "0 0 24 24",
-                        "stroke-width": "1.5",
-                        stroke: quest.quest_status.color_hex_code,
-                        fill: "none",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleQuest(quest)
-                        }
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                      }),
-                      _vm._v(" "),
-                      _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } })
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              quest.quest_status.name == "In-Progress"
-                ? _c(
-                    "svg",
-                    {
-                      staticClass: "icon icon-tabler icon-tabler-blur",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "36",
-                        height: "36",
-                        viewBox: "0 0 24 24",
-                        "stroke-width": "1.5",
-                        stroke: quest.quest_status.color_hex_code,
-                        fill: "none",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleQuest(quest)
-                        }
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: {
-                          stroke: "none",
-                          d: "M0 0h24v24H0z",
-                          fill: "none"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 3v17" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 12h9" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 9h8" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 6h6" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 18h6" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M12 15h8" } })
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              quest.quest_status.name == "Completed"
-                ? _c(
-                    "svg",
-                    {
-                      staticClass: "icon icon-tabler icon-tabler-circle-check",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "36",
-                        height: "36",
-                        viewBox: "0 0 24 24",
-                        "stroke-width": "1.5",
-                        stroke: "#4CAF50",
-                        fill: "none",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleQuest(quest)
-                        }
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                      }),
-                      _vm._v(" "),
-                      _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } }),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M9 12l2 2l4 -4" } })
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "font-weight-bolder" }, [
-              _vm.editmode == false || _vm.editmode != quest.id
-                ? _c("span", [_vm._v(_vm._s(quest.title))])
-                : _vm._e(),
-              _vm.editmode == quest.id
-                ? _c("input", {
-                    directives: [
+        return _c("div", { key: quest.id }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-100 d-flex align-items-center p-3 bg-white border-bottom"
+            },
+            [
+              _c("span", { staticClass: "mr-2" }, [
+                quest.quest_status.name == "Not Started"
+                  ? _c(
+                      "svg",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: quest.title,
-                        expression: "quest.title"
-                      }
-                    ],
-                    attrs: { type: "text" },
-                    domProps: { value: quest.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(quest, "title", $event.target.value)
-                      }
-                    }
-                  })
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "ml-auto mr-2 d-flex align-items-center" },
-              [
-                _c("span", [
-                  _vm.editmode == false || _vm.editmode != quest.id
-                    ? _c("span", [_vm._v(_vm._s(quest.quest_category.name))])
-                    : _vm._e(),
-                  _vm.editmode == quest.id
-                    ? _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: quest.title,
-                            expression: "quest.title"
-                          }
-                        ],
-                        attrs: { type: "text" },
-                        domProps: { value: quest.title },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(quest, "title", $event.target.value)
-                          }
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.editmode != quest.id
-                    ? _c(
-                        "svg",
-                        {
-                          staticClass: "icon icon-tabler icon-tabler-edit",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: "#FFC107",
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.editmode = quest.id
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("line", {
-                            attrs: { x1: "16", y1: "5", x2: "19", y2: "8" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.editmode == quest.id
-                    ? _c(
-                        "svg",
-                        {
-                          staticClass: "icon icon-tabler icon-tabler-checkbox",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: "#4CAF50",
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.updateQuest(quest)
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                          }),
-                          _vm._v(" "),
-                          _c("polyline", {
-                            attrs: { points: "9 11 12 14 20 6" }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
-                            }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("span", [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "icon icon-tabler icon-tabler-trash ml-1",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "36",
-                        height: "36",
-                        viewBox: "0 0 24 24",
-                        "stroke-width": "1.5",
-                        stroke: "#FF5722",
-                        fill: "none",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteQuest(quest)
-                        }
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                      }),
-                      _vm._v(" "),
-                      _c("line", {
-                        attrs: { x1: "4", y1: "7", x2: "20", y2: "7" }
-                      }),
-                      _vm._v(" "),
-                      _c("line", {
-                        attrs: { x1: "10", y1: "11", x2: "10", y2: "17" }
-                      }),
-                      _vm._v(" "),
-                      _c("line", {
-                        attrs: { x1: "14", y1: "11", x2: "14", y2: "17" }
-                      }),
-                      _vm._v(" "),
-                      _c("path", {
+                        staticClass: "icon icon-tabler icon-tabler-circle",
                         attrs: {
-                          d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "36",
+                          height: "36",
+                          viewBox: "0 0 24 24",
+                          "stroke-width": "1.5",
+                          stroke: quest.quest_status.color_hex_code,
+                          fill: "none",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleQuest(quest)
+                          }
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("path", {
-                        attrs: { d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" }
-                      })
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
+                      },
+                      [
+                        _c("path", {
+                          attrs: { stroke: "none", d: "M0 0h24v24H0z" }
+                        }),
+                        _vm._v(" "),
+                        _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                quest.quest_status.name == "In-Progress"
+                  ? _c(
+                      "svg",
+                      {
+                        staticClass: "icon icon-tabler icon-tabler-blur",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "36",
+                          height: "36",
+                          viewBox: "0 0 24 24",
+                          "stroke-width": "1.5",
+                          stroke: quest.quest_status.color_hex_code,
+                          fill: "none",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleQuest(quest)
+                          }
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            stroke: "none",
+                            d: "M0 0h24v24H0z",
+                            fill: "none"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 3v17" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 12h9" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 9h8" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 6h6" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 18h6" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M12 15h8" } })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                quest.quest_status.name == "Completed"
+                  ? _c(
+                      "svg",
+                      {
+                        staticClass:
+                          "icon icon-tabler icon-tabler-circle-check",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "36",
+                          height: "36",
+                          viewBox: "0 0 24 24",
+                          "stroke-width": "1.5",
+                          stroke: "#4CAF50",
+                          fill: "none",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleQuest(quest)
+                          }
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: { stroke: "none", d: "M0 0h24v24H0z" }
+                        }),
+                        _vm._v(" "),
+                        _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } }),
+                        _vm._v(" "),
+                        _c("path", { attrs: { d: "M9 12l2 2l4 -4" } })
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "font-weight-bolder" }, [
+                _vm.editmode == false || _vm.editmode != quest.id
+                  ? _c("span", [_vm._v(_vm._s(quest.title))])
+                  : _vm._e(),
+                _vm.editmode == quest.id
+                  ? _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: quest.title,
+                          expression: "quest.title"
+                        }
+                      ],
+                      attrs: { type: "text" },
+                      domProps: { value: quest.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(quest, "title", $event.target.value)
+                        }
+                      }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "ml-auto mr-2 d-flex align-items-center" },
+                [
+                  _c("span", [
+                    _vm.editmode == false || _vm.editmode != quest.id
+                      ? _c("span", [_vm._v(_vm._s(quest.quest_category.name))])
+                      : _vm._e(),
+                    _vm.editmode == quest.id
+                      ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: quest.title,
+                              expression: "quest.title"
+                            }
+                          ],
+                          attrs: { type: "text" },
+                          domProps: { value: quest.title },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(quest, "title", $event.target.value)
+                            }
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editmode != quest.id
+                      ? _c(
+                          "svg",
+                          {
+                            staticClass: "icon icon-tabler icon-tabler-edit",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "36",
+                              height: "36",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "1.5",
+                              stroke: "#FFC107",
+                              fill: "none",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.editmode = quest.id
+                              }
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: { stroke: "none", d: "M0 0h24v24H0z" }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("line", {
+                              attrs: { x1: "16", y1: "5", x2: "19", y2: "8" }
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editmode == quest.id
+                      ? _c(
+                          "svg",
+                          {
+                            staticClass:
+                              "icon icon-tabler icon-tabler-checkbox",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "36",
+                              height: "36",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "1.5",
+                              stroke: "#4CAF50",
+                              fill: "none",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.updateQuest(quest)
+                              }
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: { stroke: "none", d: "M0 0h24v24H0z" }
+                            }),
+                            _vm._v(" "),
+                            _c("polyline", {
+                              attrs: { points: "9 11 12 14 20 6" }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                              }
+                            })
+                          ]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "icon icon-tabler icon-tabler-trash ml-1",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "36",
+                          height: "36",
+                          viewBox: "0 0 24 24",
+                          "stroke-width": "1.5",
+                          stroke: "#FF5722",
+                          fill: "none",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteQuest(quest)
+                          }
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: { stroke: "none", d: "M0 0h24v24H0z" }
+                        }),
+                        _vm._v(" "),
+                        _c("line", {
+                          attrs: { x1: "4", y1: "7", x2: "20", y2: "7" }
+                        }),
+                        _vm._v(" "),
+                        _c("line", {
+                          attrs: { x1: "10", y1: "11", x2: "10", y2: "17" }
+                        }),
+                        _vm._v(" "),
+                        _c("line", {
+                          attrs: { x1: "14", y1: "11", x2: "14", y2: "17" }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+                          }
+                        })
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
       }),
       0
     )
@@ -38520,7 +38673,7 @@ var staticRenderFns = [
           staticClass: "btn btn-success",
           attrs: { type: "submit", id: "button-addon2" }
         },
-        [_vm._v("Add this to your list")]
+        [_vm._v("\n          Add this to your list\n        ")]
       )
     ])
   }
