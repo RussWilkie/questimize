@@ -35,6 +35,14 @@
         v-text="form.errors.get('title')"
       ></span>
     </form>
+    <div class="w-150" v-if="quests.length > 0">
+      <h4 class="text-white text-center">
+        Not Started: {{ questsNotStarted.length }} |
+        In-Progress: {{ questsInProgress.length }} |
+        Completed: {{ questsCompleted.length }} 
+      </h4>
+      <p class="text-white text-center">Completion Progress: {{ questsCompleted.length }}/{{ quests.length }} ({{ Math.floor((questsCompleted.length / quests.length) * 100) }}%)</p>
+    </div>
     <div class="w-100 quest">
       <div v-for="quest in quests" :key="quest.id">
         <!-- <h2
@@ -205,6 +213,9 @@ export default {
     return {
       editmode: false,
       quests: "",
+      questsNotStarted: [],
+      questsInProgress: [],
+      questsCompleted: [],
       form: new Form({
         title: "",
         category: "Mini-Quest",
@@ -270,6 +281,15 @@ export default {
         .get("/api/quest")
         .then((res) => {
           this.quests = res.data;
+          this.questsNotStarted = this.quests.filter(
+            (quest) => quest.quest_status.name == "Not Started"
+          );
+          this.questsInProgress = this.quests.filter(
+            (quest) => quest.quest_status.name == "In-Progress"
+          );
+          this.questsCompleted = this.quests.filter(
+            (quest) => quest.quest_status.name == "Completed"
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -286,7 +306,7 @@ export default {
     //       this.$set(this.categories[index], "rendered", false);
     //     }
     //   }
-      // return this.categories[index].rendered;
+    // return this.categories[index].rendered;
     // },
     saveData() {
       let data = new FormData();
@@ -305,7 +325,6 @@ export default {
         });
     },
   },
-
   mounted() {
     this.getQuests();
   },

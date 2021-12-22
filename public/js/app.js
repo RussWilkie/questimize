@@ -2266,11 +2266,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       editmode: false,
       quests: "",
+      questsNotStarted: [],
+      questsInProgress: [],
+      questsCompleted: [],
       form: new Form({
         title: "",
         category: "Mini-Quest"
@@ -2379,6 +2390,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/quest").then(function (res) {
         _this3.quests = res.data;
+        _this3.questsNotStarted = _this3.quests.filter(function (quest) {
+          return quest.quest_status.name == "Not Started";
+        });
+        _this3.questsInProgress = _this3.quests.filter(function (quest) {
+          return quest.quest_status.name == "In-Progress";
+        });
+        _this3.questsCompleted = _this3.quests.filter(function (quest) {
+          return quest.quest_status.name == "Completed";
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -38313,6 +38333,38 @@ var render = function() {
           : _vm._e()
       ]
     ),
+    _vm._v(" "),
+    _vm.quests.length > 0
+      ? _c("div", { staticClass: "w-150" }, [
+          _c("h4", { staticClass: "text-white text-center" }, [
+            _vm._v(
+              "\n      Not Started: " +
+                _vm._s(_vm.questsNotStarted.length) +
+                " |\n      In-Progress: " +
+                _vm._s(_vm.questsInProgress.length) +
+                " |\n      Completed: " +
+                _vm._s(_vm.questsCompleted.length) +
+                " \n    "
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-white text-center" }, [
+            _vm._v(
+              "Completion Progress: " +
+                _vm._s(_vm.questsCompleted.length) +
+                "/" +
+                _vm._s(_vm.quests.length) +
+                " (" +
+                _vm._s(
+                  Math.floor(
+                    (_vm.questsCompleted.length / _vm.quests.length) * 100
+                  )
+                ) +
+                "%)"
+            )
+          ])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
