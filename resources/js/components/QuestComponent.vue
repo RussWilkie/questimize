@@ -78,9 +78,9 @@
       </h4>
       <p class="text-white text-center">
         Completion Progress: {{ questsCompleted.length }}/{{
-          quests.length
+          (questsNotStarted.length + questsInProgress.length + questsCompleted.length)
         }}
-        ({{ Math.floor((questsCompleted.length / quests.length) * 100) }}%)
+        ({{ Math.floor((questsCompleted.length / (questsNotStarted.length + questsInProgress.length + questsCompleted.length)) * 100) }}%)
       </p>
     </div>
     <div class="w-100 quest">

@@ -38468,11 +38468,19 @@ var render = function() {
               "\n      Completion Progress: " +
                 _vm._s(_vm.questsCompleted.length) +
                 "/" +
-                _vm._s(_vm.quests.length) +
+                _vm._s(
+                  _vm.questsNotStarted.length +
+                    _vm.questsInProgress.length +
+                    _vm.questsCompleted.length
+                ) +
                 "\n      (" +
                 _vm._s(
                   Math.floor(
-                    (_vm.questsCompleted.length / _vm.quests.length) * 100
+                    (_vm.questsCompleted.length /
+                      (_vm.questsNotStarted.length +
+                        _vm.questsInProgress.length +
+                        _vm.questsCompleted.length)) *
+                      100
                   )
                 ) +
                 "%)\n    "
