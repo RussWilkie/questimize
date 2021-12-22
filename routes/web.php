@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('export', 'App\Http\Controllers\ImportExportController@export')->name('export');
+Route::get('importExportView', 'App\Http\Controllers\ImportExportController@importExportView');
+Route::post('import', 'App\Http\Controllers\ImportExportController@import')->name('import');
