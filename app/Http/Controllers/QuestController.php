@@ -109,4 +109,9 @@ class QuestController extends Controller
         $quest->delete();
         return Quest::latest()->get();
     }
+    public function search($keyword)
+    {
+        return Quest::with('questStatus', 'questCategory')->where('title', 'like', '%' . $keyword . '%')
+        ->orderBy('quest_category_id', 'asc')->get();
+    }
 }

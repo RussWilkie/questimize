@@ -1,5 +1,41 @@
 <template>
   <div class="w-30">
+    <h3>Search Feature</h3>
+    <form @submit.prevent="searchData">
+      <div class="input-group mb-3 w-100">
+        <input
+          v-model="searchForm.keyword"
+          placeholder=" Search Quest Name"
+          type="text"
+          class="form-control form-control-lg"
+          aria-label="Quest Search"
+          aria-describedby="button-addon2"
+        />
+        <!-- CATEGORY SEARCH SELECTION -->
+        <!-- <select
+          v-model="form.category"
+          id="categories"
+          class="form-control form-control-lg"
+          name="categories"
+        >
+          <option v-for="category in categories" :key="category.value">
+            {{ category.text }}
+          </option>
+        </select> -->
+        <div class="input-group-append">
+          <button class="btn btn-success" type="submit" id="button-addon2">
+            Search
+          </button>
+        </div>
+      </div>
+      <span
+        class="text-danger pt-3 pb-3"
+        style="font-size: 20px"
+        v-if="form.errors.has('title')"
+        v-text="form.errors.get('title')"
+      ></span>
+    </form>
+    <h3>Add Quest</h3>
     <form @submit.prevent="saveData">
       <div class="input-group mb-3 w-100">
         <input
@@ -37,11 +73,15 @@
     </form>
     <div class="w-150" v-if="quests.length > 0">
       <h4 class="text-white text-center">
-        Not Started: {{ questsNotStarted.length }} |
-        In-Progress: {{ questsInProgress.length }} |
-        Completed: {{ questsCompleted.length }} 
+        Not Started: {{ questsNotStarted.length }} | In-Progress:
+        {{ questsInProgress.length }} | Completed: {{ questsCompleted.length }}
       </h4>
-      <p class="text-white text-center">Completion Progress: {{ questsCompleted.length }}/{{ quests.length }} ({{ Math.floor((questsCompleted.length / quests.length) * 100) }}%)</p>
+      <p class="text-white text-center">
+        Completion Progress: {{ questsCompleted.length }}/{{
+          quests.length
+        }}
+        ({{ Math.floor((questsCompleted.length / quests.length) * 100) }}%)
+      </p>
     </div>
     <div class="w-100 quest">
       <div v-for="quest in quests" :key="quest.id">
@@ -220,6 +260,9 @@ export default {
         title: "",
         category: "Mini-Quest",
       }),
+      searchForm: new Form({
+        keyword: "",
+      }),
       categories: [
         { text: "Mini-Quest", value: "Mini-Quest", rendered: false },
         { text: "Ninja/Assassin", value: "Ninja/Assasin", rendered: false },
@@ -323,6 +366,22 @@ export default {
         .catch((error) => {
           this.form.errors.record(error.response.data.errors);
         });
+    },
+    searchData() {
+      let keyword = new FormData();
+      keyword.append("keyword", this.searchForm.keyword);
+      if (this.searchForm.keyword !== "") {
+        axios
+          .get("/api/search/" + this.searchForm.keyword)
+          .then((res) => {
+            this.quests = res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        this.getQuests();
+      }
     },
   },
   mounted() {

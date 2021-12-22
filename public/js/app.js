@@ -2274,6 +2274,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2285,6 +2325,9 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         title: "",
         category: "Mini-Quest"
+      }),
+      searchForm: new Form({
+        keyword: ""
       }),
       categories: [{
         text: "Mini-Quest",
@@ -2432,6 +2475,22 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this4.form.errors.record(error.response.data.errors);
       });
+    },
+    searchData: function searchData() {
+      var _this5 = this;
+
+      var keyword = new FormData();
+      keyword.append("keyword", this.searchForm.keyword);
+
+      if (this.searchForm.keyword !== "") {
+        axios.get("/api/search/" + this.searchForm.keyword).then(function (res) {
+          _this5.quests = res.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        this.getQuests();
+      }
     }
   },
   mounted: function mounted() {
@@ -38239,6 +38298,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "w-30" }, [
+    _c("h3", [_vm._v("Search Feature")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.searchData.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "input-group mb-3 w-100" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchForm.keyword,
+                expression: "searchForm.keyword"
+              }
+            ],
+            staticClass: "form-control form-control-lg",
+            attrs: {
+              placeholder: " Search Quest Name",
+              type: "text",
+              "aria-label": "Quest Search",
+              "aria-describedby": "button-addon2"
+            },
+            domProps: { value: _vm.searchForm.keyword },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.searchForm, "keyword", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0)
+        ]),
+        _vm._v(" "),
+        _vm.form.errors.has("title")
+          ? _c("span", {
+              staticClass: "text-danger pt-3 pb-3",
+              staticStyle: { "font-size": "20px" },
+              domProps: { textContent: _vm._s(_vm.form.errors.get("title")) }
+            })
+          : _vm._e()
+      ]
+    ),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Add Quest")]),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -38321,7 +38436,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ]),
         _vm._v(" "),
         _vm.form.errors.has("title")
@@ -38340,27 +38455,27 @@ var render = function() {
             _vm._v(
               "\n      Not Started: " +
                 _vm._s(_vm.questsNotStarted.length) +
-                " |\n      In-Progress: " +
+                " | In-Progress:\n      " +
                 _vm._s(_vm.questsInProgress.length) +
-                " |\n      Completed: " +
+                " | Completed: " +
                 _vm._s(_vm.questsCompleted.length) +
-                " \n    "
+                "\n    "
             )
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "text-white text-center" }, [
             _vm._v(
-              "Completion Progress: " +
+              "\n      Completion Progress: " +
                 _vm._s(_vm.questsCompleted.length) +
                 "/" +
                 _vm._s(_vm.quests.length) +
-                " (" +
+                "\n      (" +
                 _vm._s(
                   Math.floor(
                     (_vm.questsCompleted.length / _vm.quests.length) * 100
                   )
                 ) +
-                "%)"
+                "%)\n    "
             )
           ])
         ])
@@ -38714,6 +38829,21 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "submit", id: "button-addon2" }
+        },
+        [_vm._v("\n          Search\n        ")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
