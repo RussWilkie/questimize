@@ -1,50 +1,10 @@
 <template>
   <div class="w-30">
-    <h3>Search Feature</h3>
-    <form @submit.prevent="searchData">
-      <div class="input-group mb-3 w-100">
-        <input
-          v-model="searchForm.keyword"
-          placeholder=" Search Quest Name"
-          type="text"
-          class="form-control form-control-lg"
-          aria-label="Quest Search"
-          aria-describedby="button-addon2"
-        />
-        <!-- CATEGORY SEARCH SELECTION -->
-        <select
-          v-model="searchForm.category"
-          id="searchCategories"
-          class="form-control form-control-lg"
-          name="searchCategories"
-        >
-          <option v-for="category in categories" :key="category.value">
-            {{ category.text }}
-          </option>
-        </select>
-        <select
-          v-model="searchForm.status"
-          id="searchStatus"
-          class="form-control form-control-lg"
-          name="searchStatus"
-        >
-          <option v-for="status in statuses" :key="status.value">
-            {{ status.text }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-success" type="submit" id="button-addon2">
-            Search
-          </button>
-        </div>
-      </div>
-      <span
-        class="text-danger pt-3 pb-3"
-        style="font-size: 20px"
-        v-if="form.errors.has('title')"
-        v-text="form.errors.get('title')"
-      ></span>
-    </form>
+    <search-component
+      :categories="categories"
+      @search="filterQuests"
+      :statuses="statuses"
+    ></search-component>
     <h3>Add Quest</h3>
     <form @submit.prevent="saveData">
       <div class="input-group mb-3 w-100">
@@ -268,22 +228,19 @@
 </template>
 
 <script>
+import SearchComponent from "./SearchComponent.vue";
 export default {
+  components: { SearchComponent },
   data() {
     return {
       editmode: false,
-      quests: "",
+      quests: [],
       questsNotStarted: [],
       questsInProgress: [],
       questsCompleted: [],
       form: new Form({
         title: "",
         category: "Mini-Quest",
-      }),
-      searchForm: new Form({
-        keyword: "",
-        category: "All Categories",
-        status: "All Statuses",
       }),
       statuses: [
         { text: "All Statuses", value: "All Statuses" },
@@ -310,11 +267,11 @@ export default {
     };
   },
   computed: {
-    addCategories: function (){
-      return this.categories.filter(category =>{
+    addCategories: function () {
+      return this.categories.filter((category) => {
         return category.value != "All Categories";
-      })
-    }
+      });
+    },
   },
   methods: {
     deleteQuest(e) {
@@ -403,21 +360,9 @@ export default {
           this.form.errors.record(error.response.data.errors);
         });
     },
-    searchData() {
-      let fields = new FormData();
-      fields.append("keyword", this.searchForm.keyword);
-      fields.append("category", this.searchForm.category);
-      fields.append("status", this.searchForm.status);
-      axios
-        .post("/api/search", fields)
-        .then((res) => {
-          console.log(res.data);
-          this.quests = res.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    filterQuests(filter) {
+      this.quests = filter;
+    }
   },
   mounted() {
     this.getQuests();

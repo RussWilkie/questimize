@@ -23,6 +23,7 @@ window.Vue = require('vue').default;
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('quest-component', require('./components/QuestComponent.vue').default);
+Vue.component('search-component', require('./components/SearchComponent.vue').default);
 
 
 /**
