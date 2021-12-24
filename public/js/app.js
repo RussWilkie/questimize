@@ -2160,7 +2160,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SearchQuests_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchQuests.vue */ "./resources/js/components/SearchQuests.vue");
 //
 //
 //
@@ -2340,30 +2339,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    SearchQuests: _SearchQuests_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
       editmode: false,
@@ -2523,6 +2499,55 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getQuests();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    quests: Array,
+    questsNotStarted: Array,
+    questsInProgress: Array,
+    questsCompleted: Array
+  },
+  data: function data() {
+    return {};
   }
 });
 
@@ -2889,6 +2914,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('quest-component', __webpack_require__(/*! ./components/QuestComponent.vue */ "./resources/js/components/QuestComponent.vue")["default"]);
 Vue.component('search-quests', __webpack_require__(/*! ./components/SearchQuests.vue */ "./resources/js/components/SearchQuests.vue")["default"]);
 Vue.component('add-quest', __webpack_require__(/*! ./components/AddQuest.vue */ "./resources/js/components/AddQuest.vue")["default"]);
+Vue.component('quests-stats', __webpack_require__(/*! ./components/QuestsStats.vue */ "./resources/js/components/QuestsStats.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38406,6 +38432,45 @@ component.options.__file = "resources/js/components/QuestComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/QuestsStats.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/QuestsStats.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuestsStats.vue?vue&type=template&id=e459a19a& */ "./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a&");
+/* harmony import */ var _QuestsStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuestsStats.vue?vue&type=script&lang=js& */ "./resources/js/components/QuestsStats.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _QuestsStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/QuestsStats.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/SearchQuests.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/SearchQuests.vue ***!
@@ -38477,6 +38542,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/QuestsStats.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/QuestsStats.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestsStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuestsStats.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestsStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/SearchQuests.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/SearchQuests.vue?vue&type=script&lang=js& ***!
@@ -38523,6 +38604,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestComponent_vue_vue_type_template_id_1299d7e6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestComponent_vue_vue_type_template_id_1299d7e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuestComponent.vue?vue&type=template&id=1299d7e6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=template&id=1299d7e6&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestsStats_vue_vue_type_template_id_e459a19a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuestsStats.vue?vue&type=template&id=e459a19a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a&");
 
 
 /***/ }),
@@ -38712,45 +38810,14 @@ var render = function() {
         on: { add: _vm.getQuests }
       }),
       _vm._v(" "),
-      _vm.quests.length > 0
-        ? _c("div", { staticClass: "w-150" }, [
-            _c("h4", { staticClass: "text-white text-center" }, [
-              _vm._v(
-                "\n      Not Started: " +
-                  _vm._s(_vm.questsNotStarted.length) +
-                  " | In-Progress:\n      " +
-                  _vm._s(_vm.questsInProgress.length) +
-                  " | Completed: " +
-                  _vm._s(_vm.questsCompleted.length) +
-                  "\n    "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white text-center" }, [
-              _vm._v(
-                "\n      Completion Progress: " +
-                  _vm._s(_vm.questsCompleted.length) +
-                  "/" +
-                  _vm._s(
-                    _vm.questsNotStarted.length +
-                      _vm.questsInProgress.length +
-                      _vm.questsCompleted.length
-                  ) +
-                  "\n      (" +
-                  _vm._s(
-                    Math.floor(
-                      (_vm.questsCompleted.length /
-                        (_vm.questsNotStarted.length +
-                          _vm.questsInProgress.length +
-                          _vm.questsCompleted.length)) *
-                        100
-                    )
-                  ) +
-                  "%)\n    "
-              )
-            ])
-          ])
-        : _vm._e(),
+      _c("quests-stats", {
+        attrs: {
+          quests: _vm.quests,
+          questsNotStarted: _vm.questsNotStarted,
+          questsInProgress: _vm.questsInProgress,
+          questsCompleted: _vm.questsCompleted
+        }
+      }),
       _vm._v(" "),
       _c(
         "div",
@@ -39108,6 +39175,69 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestsStats.vue?vue&type=template&id=e459a19a& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.quests.length > 0
+    ? _c("div", { staticClass: "w-150" }, [
+        _c("h4", { staticClass: "text-white text-center" }, [
+          _vm._v(
+            "\r\n        Not Started: " +
+              _vm._s(_vm.questsNotStarted.length) +
+              " | In-Progress:\r\n        " +
+              _vm._s(_vm.questsInProgress.length) +
+              " | Completed: " +
+              _vm._s(_vm.questsCompleted.length) +
+              "\r\n      "
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-white text-center" }, [
+          _vm._v(
+            "\r\n        Completion Progress: " +
+              _vm._s(_vm.questsCompleted.length) +
+              "/" +
+              _vm._s(
+                _vm.questsNotStarted.length +
+                  _vm.questsInProgress.length +
+                  _vm.questsCompleted.length
+              ) +
+              "\r\n        (" +
+              _vm._s(
+                Math.floor(
+                  (_vm.questsCompleted.length /
+                    (_vm.questsNotStarted.length +
+                      _vm.questsInProgress.length +
+                      _vm.questsCompleted.length)) *
+                    100
+                )
+              ) +
+              "%)\r\n      "
+          )
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

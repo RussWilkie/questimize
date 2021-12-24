@@ -5,33 +5,14 @@
       @search="filterQuests"
       :statuses="statuses"
     ></search-quests>
-    <add-quest
-    :categories="categories"
-    @add="getQuests"
+    <add-quest :categories="categories" @add="getQuests"> </add-quest>
+    <quests-stats
+      :quests="quests"
+      :questsNotStarted="questsNotStarted"
+      :questsInProgress="questsInProgress"
+      :questsCompleted="questsCompleted"
     >
-    </add-quest>
-    <div class="w-150" v-if="quests.length > 0">
-      <h4 class="text-white text-center">
-        Not Started: {{ questsNotStarted.length }} | In-Progress:
-        {{ questsInProgress.length }} | Completed: {{ questsCompleted.length }}
-      </h4>
-      <p class="text-white text-center">
-        Completion Progress: {{ questsCompleted.length }}/{{
-          questsNotStarted.length +
-          questsInProgress.length +
-          questsCompleted.length
-        }}
-        ({{
-          Math.floor(
-            (questsCompleted.length /
-              (questsNotStarted.length +
-                questsInProgress.length +
-                questsCompleted.length)) *
-              100
-          )
-        }}%)
-      </p>
-    </div>
+    </quests-stats>
     <div class="w-100 quest">
       <div v-for="quest in quests" :key="quest.id">
         <!-- <h2
@@ -197,9 +178,7 @@
 </template>
 
 <script>
-import SearchQuests from "./SearchQuests.vue";
 export default {
-  components: { SearchQuests },
   data() {
     return {
       editmode: false,
@@ -304,7 +283,7 @@ export default {
     // },
     filterQuests(filter) {
       this.quests = filter;
-    }
+    },
   },
   mounted() {
     this.getQuests();
