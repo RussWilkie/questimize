@@ -38,21 +38,21 @@ class QuestController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-        [
-            'title' => 'required'
-        ],
-        [
-            'title.required' => 'Quest input field is required!'
-        ]
+        $this->validate(
+            $request,
+            [
+                'title' => 'required'
+            ],
+            [
+                'title.required' => 'Quest input field is required!'
+            ]
         );
-        
+
         $data = $request->all();
         $category = QuestCategory::where('name', '=', $data['category'])->first();
         $quest = Quest::create($request->all());
         $quest->questCategory()->associate($category);
         $quest->save();
-        
     }
 
     /**
@@ -86,11 +86,11 @@ class QuestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $quest = Quest::findOrFail($id);
         $quest->update($request->all());
         $statusName = $request->quest_status['name'];
-        if(!is_null($statusName)){
+        if (!is_null($statusName)) {
             $statusRow = QuestStatus::where('name', '=', $statusName)->first();
             $quest->quest_status_id = $statusRow->id;
         }
@@ -109,9 +109,35 @@ class QuestController extends Controller
         $quest->delete();
         return Quest::latest()->get();
     }
-    public function search($keyword)
+    public function search(Request $request)
     {
-        return Quest::with('questStatus', 'questCategory')->where('title', 'like', '%' . $keyword . '%')
-        ->orderBy('quest_category_id', 'asc')->get();
+        $data = $request->all();
+        $keyword = $data['keyword'];
+        $category = $data['category'];
+        $status = $data['status'];
+
+        return Quest::with(['questCategory', 'questStatus'])
+            ->whereHas(
+                'questCategory',
+                function ($query) use ($category) {
+                    if ($category !== "All Categories") {
+                        $query->where('name', $category);
+                    }
+                }
+            )
+            ->whereHas(
+                'questStatus',
+                function ($query) use ($status) {
+                    if ($status !== "All Statuses") {
+                        $query->where('name', $status);
+                    }
+                }
+            )
+            ->where(function ($query) use ($keyword) {
+                if (!is_null($keyword)) {
+                    $query->where('title', 'like', '%' . $keyword . '%');
+                }
+            })
+            ->orderBy('quest_category_id', 'asc')->get();
     }
 }

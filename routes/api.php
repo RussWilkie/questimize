@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('quest', QuestController::class);
 
-Route::get('search/{keyword}','App\Http\Controllers\QuestController@search');
+Route::post('search','App\Http\Controllers\QuestController@search');

@@ -12,16 +12,26 @@
           aria-describedby="button-addon2"
         />
         <!-- CATEGORY SEARCH SELECTION -->
-        <!-- <select
-          v-model="form.category"
-          id="categories"
+        <select
+          v-model="searchForm.category"
+          id="searchCategories"
           class="form-control form-control-lg"
-          name="categories"
+          name="searchCategories"
         >
           <option v-for="category in categories" :key="category.value">
             {{ category.text }}
           </option>
-        </select> -->
+        </select>
+        <select
+          v-model="searchForm.status"
+          id="searchStatus"
+          class="form-control form-control-lg"
+          name="searchStatus"
+        >
+          <option v-for="status in statuses" :key="status.value">
+            {{ status.text }}
+          </option>
+        </select>
         <div class="input-group-append">
           <button class="btn btn-success" type="submit" id="button-addon2">
             Search
@@ -54,7 +64,7 @@
           class="form-control form-control-lg"
           name="categories"
         >
-          <option v-for="category in categories" :key="category.value">
+          <option v-for="category in addCategories" :key="category.value">
             {{ category.text }}
           </option>
         </select>
@@ -78,9 +88,19 @@
       </h4>
       <p class="text-white text-center">
         Completion Progress: {{ questsCompleted.length }}/{{
-          (questsNotStarted.length + questsInProgress.length + questsCompleted.length)
+          questsNotStarted.length +
+          questsInProgress.length +
+          questsCompleted.length
         }}
-        ({{ Math.floor((questsCompleted.length / (questsNotStarted.length + questsInProgress.length + questsCompleted.length)) * 100) }}%)
+        ({{
+          Math.floor(
+            (questsCompleted.length /
+              (questsNotStarted.length +
+                questsInProgress.length +
+                questsCompleted.length)) *
+              100
+          )
+        }}%)
       </p>
     </div>
     <div class="w-100 quest">
@@ -262,8 +282,17 @@ export default {
       }),
       searchForm: new Form({
         keyword: "",
+        category: "All Categories",
+        status: "All Statuses",
       }),
+      statuses: [
+        { text: "All Statuses", value: "All Statuses" },
+        { text: "Not Started", value: "Not Started" },
+        { text: "In-Progress", value: "In-Progress" },
+        { text: "Completed", value: "Completed" },
+      ],
       categories: [
+        { text: "All Categories", value: "All Categories" },
         { text: "Mini-Quest", value: "Mini-Quest", rendered: false },
         { text: "Ninja/Assassin", value: "Ninja/Assasin", rendered: false },
         { text: "Adventurer", value: "Adventurer", rendered: false },
@@ -279,6 +308,13 @@ export default {
         { text: "Master", value: "Master", rendered: false },
       ],
     };
+  },
+  computed: {
+    addCategories: function (){
+      return this.categories.filter(category =>{
+        return category.value != "All Categories";
+      })
+    }
   },
   methods: {
     deleteQuest(e) {
@@ -368,20 +404,19 @@ export default {
         });
     },
     searchData() {
-      let keyword = new FormData();
-      keyword.append("keyword", this.searchForm.keyword);
-      if (this.searchForm.keyword !== "") {
-        axios
-          .get("/api/search/" + this.searchForm.keyword)
-          .then((res) => {
-            this.quests = res.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        this.getQuests();
-      }
+      let fields = new FormData();
+      fields.append("keyword", this.searchForm.keyword);
+      fields.append("category", this.searchForm.category);
+      fields.append("status", this.searchForm.status);
+      axios
+        .post("/api/search", fields)
+        .then((res) => {
+          console.log(res.data);
+          this.quests = res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   mounted() {

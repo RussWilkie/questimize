@@ -2314,6 +2314,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2327,9 +2347,27 @@ __webpack_require__.r(__webpack_exports__);
         category: "Mini-Quest"
       }),
       searchForm: new Form({
-        keyword: ""
+        keyword: "",
+        category: "All Categories",
+        status: "All Statuses"
       }),
+      statuses: [{
+        text: "All Statuses",
+        value: "All Statuses"
+      }, {
+        text: "Not Started",
+        value: "Not Started"
+      }, {
+        text: "In-Progress",
+        value: "In-Progress"
+      }, {
+        text: "Completed",
+        value: "Completed"
+      }],
       categories: [{
+        text: "All Categories",
+        value: "All Categories"
+      }, {
         text: "Mini-Quest",
         value: "Mini-Quest",
         rendered: false
@@ -2383,6 +2421,13 @@ __webpack_require__.r(__webpack_exports__);
         rendered: false
       }]
     };
+  },
+  computed: {
+    addCategories: function addCategories() {
+      return this.categories.filter(function (category) {
+        return category.value != "All Categories";
+      });
+    }
   },
   methods: {
     deleteQuest: function deleteQuest(e) {
@@ -2479,18 +2524,16 @@ __webpack_require__.r(__webpack_exports__);
     searchData: function searchData() {
       var _this5 = this;
 
-      var keyword = new FormData();
-      keyword.append("keyword", this.searchForm.keyword);
-
-      if (this.searchForm.keyword !== "") {
-        axios.get("/api/search/" + this.searchForm.keyword).then(function (res) {
-          _this5.quests = res.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      } else {
-        this.getQuests();
-      }
+      var fields = new FormData();
+      fields.append("keyword", this.searchForm.keyword);
+      fields.append("category", this.searchForm.category);
+      fields.append("status", this.searchForm.status);
+      axios.post("/api/search", fields).then(function (res) {
+        console.log(res.data);
+        _this5.quests = res.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   mounted: function mounted() {
@@ -38339,6 +38382,84 @@ var render = function() {
             }
           }),
           _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchForm.category,
+                  expression: "searchForm.category"
+                }
+              ],
+              staticClass: "form-control form-control-lg",
+              attrs: { id: "searchCategories", name: "searchCategories" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.searchForm,
+                    "category",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(_vm.categories, function(category) {
+              return _c("option", { key: category.value }, [
+                _vm._v("\n          " + _vm._s(category.text) + "\n        ")
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchForm.status,
+                  expression: "searchForm.status"
+                }
+              ],
+              staticClass: "form-control form-control-lg",
+              attrs: { id: "searchStatus", name: "searchStatus" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.searchForm,
+                    "status",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(_vm.statuses, function(status) {
+              return _c("option", { key: status.value }, [
+                _vm._v("\n          " + _vm._s(status.text) + "\n        ")
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
           _vm._m(0)
         ]),
         _vm._v(" "),
@@ -38428,7 +38549,7 @@ var render = function() {
                 }
               }
             },
-            _vm._l(_vm.categories, function(category) {
+            _vm._l(_vm.addCategories, function(category) {
               return _c("option", { key: category.value }, [
                 _vm._v("\n          " + _vm._s(category.text) + "\n        ")
               ])
