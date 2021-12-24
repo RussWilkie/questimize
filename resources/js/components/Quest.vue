@@ -2,7 +2,7 @@
   <div class="w-100 d-flex align-items-center p-3 bg-white border-bottom">
     <span class="mr-2">
       <svg
-        v-on:click="toggleQuest(quest)"
+        @click="toggleQuest(quest)"
         v-if="quest.quest_status.name == 'Not Started'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-circle"
@@ -19,7 +19,7 @@
         <circle cx="12" cy="12" r="9" />
       </svg>
       <svg
-        v-on:click="toggleQuest(quest)"
+        @click="toggleQuest(quest)"
         v-if="quest.quest_status.name == 'In-Progress'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-blur"
@@ -44,7 +44,7 @@
         <path d="M12 15h8" />
       </svg>
       <svg
-        v-on:click="toggleQuest(quest)"
+        @click="toggleQuest(quest)"
         v-if="quest.quest_status.name == 'Completed'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-circle-check"
@@ -69,15 +69,36 @@
       }}</span
       ><input v-if="editmode == quest.id" v-model="quest.title" type="text" />
     </div>
-
+    <div
+      v-if="showMode == quest.id"
+      class="ml-auto mr-2 d-flex align-items-center"
+    >
+      {{ quest.description }}
+    </div>
     <div class="ml-auto mr-2 d-flex align-items-center">
       <span>
-        <span>{{
-          quest.quest_category.name
-        }}</span
-        >
+        <span>{{ quest.quest_category.name }}</span>
         <svg
-          v-on:click="editmode = quest.id"
+          @click="toggleMoreInfo(quest)"
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-eye"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="2" />
+          <path
+            d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+          />
+        </svg>
+        <svg
+          @click="editmode = quest.id"
           v-if="editmode != quest.id"
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-edit"
@@ -99,7 +120,7 @@
         </svg>
         <svg
           v-if="editmode == quest.id"
-          v-on:click="updateQuest(quest)"
+          @click="updateQuest(quest)"
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-checkbox"
           width="36"
@@ -120,7 +141,7 @@
       </span>
       <span>
         <svg
-          v-on:click="deleteQuest(quest)"
+          @click="deleteQuest(quest)"
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-trash ml-1"
           width="36"
@@ -150,6 +171,7 @@ export default {
   data() {
     return {
       editmode: false,
+      showMode: false,
     };
   },
   methods: {
@@ -167,16 +189,15 @@ export default {
           this.form.errors.record(error.response.data.errors);
         });
     },
-    updateQuest(e) {
-      this.editmode = false;
-      let data = new FormData();
-      data.append("_method", "PATCH");
-      data.append("title", e.title);
-      axios.post("/api/quest/" + e.id, data).catch((error) => {
-        this.form.errors.record(error.response.data.errors);
-      });
+    toggleMoreInfo(e) {
+    //   console.log(e);
+    //   console.log(this.showMode);
+      if (!this.showMode) {
+        this.showMode = e.id;
+      } else {
+        this.showMode = false;
+      }
     },
-
     toggleQuest(e) {
       let data = new FormData();
       data.append("_method", "PATCH");
@@ -192,6 +213,16 @@ export default {
       axios.post("/api/quest/" + e.id, data);
       //   this.getQuests();
       this.$emit("getQuests");
+    },
+
+    updateQuest(e) {
+      this.editmode = false;
+      let data = new FormData();
+      data.append("_method", "PATCH");
+      data.append("title", e.title);
+      axios.post("/api/quest/" + e.id, data).catch((error) => {
+        this.form.errors.record(error.response.data.errors);
+      });
     },
   },
 };

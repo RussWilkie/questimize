@@ -2304,13 +2304,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     quest: Object
   },
   data: function data() {
     return {
-      editmode: false
+      editmode: false,
+      showMode: false
     };
   },
   methods: {
@@ -2327,16 +2349,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.form.errors.record(error.response.data.errors);
       });
     },
-    updateQuest: function updateQuest(e) {
-      var _this2 = this;
-
-      this.editmode = false;
-      var data = new FormData();
-      data.append("_method", "PATCH");
-      data.append("title", e.title);
-      axios.post("/api/quest/" + e.id, data)["catch"](function (error) {
-        _this2.form.errors.record(error.response.data.errors);
-      });
+    toggleMoreInfo: function toggleMoreInfo(e) {
+      //   console.log(e);
+      //   console.log(this.showMode);
+      if (!this.showMode) {
+        this.showMode = e.id;
+      } else {
+        this.showMode = false;
+      }
     },
     toggleQuest: function toggleQuest(e) {
       var data = new FormData();
@@ -2357,6 +2377,17 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/quest/" + e.id, data); //   this.getQuests();
 
       this.$emit("getQuests");
+    },
+    updateQuest: function updateQuest(e) {
+      var _this2 = this;
+
+      this.editmode = false;
+      var data = new FormData();
+      data.append("_method", "PATCH");
+      data.append("title", e.title);
+      axios.post("/api/quest/" + e.id, data)["catch"](function (error) {
+        _this2.form.errors.record(error.response.data.errors);
+      });
     }
   }
 });
@@ -39004,9 +39035,52 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
+      _vm.showMode == _vm.quest.id
+        ? _c("div", { staticClass: "ml-auto mr-2 d-flex align-items-center" }, [
+            _vm._v("\n    " + _vm._s(_vm.quest.description) + "\n  ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "ml-auto mr-2 d-flex align-items-center" }, [
         _c("span", [
           _c("span", [_vm._v(_vm._s(_vm.quest.quest_category.name))]),
+          _vm._v(" "),
+          _c(
+            "svg",
+            {
+              staticClass: "icon icon-tabler icon-tabler-eye",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                width: "36",
+                height: "36",
+                viewBox: "0 0 24 24",
+                "stroke-width": "1.5",
+                stroke: "currentColor",
+                fill: "none",
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.toggleMoreInfo(_vm.quest)
+                }
+              }
+            },
+            [
+              _c("path", {
+                attrs: { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }
+              }),
+              _vm._v(" "),
+              _c("circle", { attrs: { cx: "12", cy: "12", r: "2" } }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  d:
+                    "M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+                }
+              })
+            ]
+          ),
           _vm._v(" "),
           _vm.editmode != _vm.quest.id
             ? _c(
