@@ -190,8 +190,6 @@ export default {
         });
     },
     toggleMoreInfo(e) {
-    //   console.log(e);
-    //   console.log(this.showMode);
       if (!this.showMode) {
         this.showMode = e.id;
       } else {
