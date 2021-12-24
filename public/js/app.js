@@ -2149,10 +2149,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2304,118 +2304,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    quest: Object
+  },
   data: function data() {
     return {
-      editmode: false,
-      quests: [],
-      questsNotStarted: [],
-      questsInProgress: [],
-      questsCompleted: [],
-      statuses: [{
-        text: "All Statuses",
-        value: "All Statuses"
-      }, {
-        text: "Not Started",
-        value: "Not Started"
-      }, {
-        text: "In-Progress",
-        value: "In-Progress"
-      }, {
-        text: "Completed",
-        value: "Completed"
-      }],
-      categories: [{
-        text: "All Categories",
-        value: "All Categories"
-      }, {
-        text: "Mini-Quest",
-        value: "Mini-Quest",
-        rendered: false
-      }, {
-        text: "Ninja/Assassin",
-        value: "Ninja/Assasin",
-        rendered: false
-      }, {
-        text: "Adventurer",
-        value: "Adventurer",
-        rendered: false
-      }, {
-        text: "Wizard",
-        value: "Wizard",
-        rendered: false
-      }, {
-        text: "Ranger",
-        value: "Ranger",
-        rendered: false
-      }, {
-        text: "Scout",
-        value: "Scout",
-        rendered: false
-      }, {
-        text: "Warrior",
-        value: "Warrior",
-        rendered: false
-      }, {
-        text: "Bard",
-        value: "Bard",
-        rendered: false
-      }, {
-        text: "Jester",
-        value: "Jester",
-        rendered: false
-      }, {
-        text: "Clergy",
-        value: "Clergy",
-        rendered: false
-      }, {
-        text: "Chef",
-        value: "Chef",
-        rendered: false
-      }, {
-        text: "Hero",
-        value: "Hero",
-        rendered: false
-      }, {
-        text: "Master",
-        value: "Master",
-        rendered: false
-      }]
+      editmode: false
     };
   },
   methods: {
@@ -2425,9 +2320,9 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append("_method", "DELETE");
       axios.post("/api/quest/" + e.id, data).then(function (res) {
-        _this.quests = res.data;
+        _this.quests = res.data; //   this.getQuests();
 
-        _this.getQuests();
+        _this.$emit("getQuests");
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
       });
@@ -2459,40 +2354,133 @@ __webpack_require__.r(__webpack_exports__);
         data.append("quest_status[name]", "Not Started");
       }
 
-      axios.post("/api/quest/" + e.id, data);
-      this.getQuests();
-    },
+      axios.post("/api/quest/" + e.id, data); //   this.getQuests();
+
+      this.$emit("getQuests");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      quests: [],
+      questsNotStarted: [],
+      questsInProgress: [],
+      questsCompleted: [],
+      statuses: [{
+        text: "All Statuses",
+        value: "All Statuses"
+      }, {
+        text: "Not Started",
+        value: "Not Started"
+      }, {
+        text: "In-Progress",
+        value: "In-Progress"
+      }, {
+        text: "Completed",
+        value: "Completed"
+      }],
+      categories: [{
+        text: "All Categories",
+        value: "All Categories"
+      }, {
+        text: "Mini-Quest",
+        value: "Mini-Quest"
+      }, {
+        text: "Ninja/Assassin",
+        value: "Ninja/Assasin"
+      }, {
+        text: "Adventurer",
+        value: "Adventurer"
+      }, {
+        text: "Wizard",
+        value: "Wizard"
+      }, {
+        text: "Ranger",
+        value: "Ranger"
+      }, {
+        text: "Scout",
+        value: "Scout"
+      }, {
+        text: "Warrior",
+        value: "Warrior"
+      }, {
+        text: "Bard",
+        value: "Bard"
+      }, {
+        text: "Jester",
+        value: "Jester"
+      }, {
+        text: "Clergy",
+        value: "Clergy"
+      }, {
+        text: "Chef",
+        value: "Chef"
+      }, {
+        text: "Hero",
+        value: "Hero"
+      }, {
+        text: "Master",
+        value: "Master"
+      }]
+    };
+  },
+  methods: {
     getQuests: function getQuests() {
-      var _this3 = this;
+      var _this = this;
 
       axios.get("/api/quest").then(function (res) {
-        _this3.quests = res.data;
-        _this3.questsNotStarted = _this3.quests.filter(function (quest) {
+        _this.quests = res.data;
+        _this.questsNotStarted = _this.quests.filter(function (quest) {
           return quest.quest_status.name == "Not Started";
         });
-        _this3.questsInProgress = _this3.quests.filter(function (quest) {
+        _this.questsInProgress = _this.quests.filter(function (quest) {
           return quest.quest_status.name == "In-Progress";
         });
-        _this3.questsCompleted = _this3.quests.filter(function (quest) {
+        _this.questsCompleted = _this.quests.filter(function (quest) {
           return quest.quest_status.name == "Completed";
         });
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    // renderCategory(category) {
-    //   let index = this.categories.findIndex((cat) => cat.text == category);
-    //   if (index == -1) {
-    //     this.$set(this.categories[index], "rendered", false);
-    //   } else {
-    //     if (!this.categories[index].rendered) {
-    //       this.$set(this.categories[index], "rendered", true);
-    //     } else {
-    //       this.$set(this.categories[index], "rendered", false);
-    //     }
-    //   }
-    // return this.categories[index].rendered;
-    // },
     filterQuests: function filterQuests(filter) {
       this.quests = filter;
     }
@@ -2915,6 +2903,7 @@ Vue.component('quest-component', __webpack_require__(/*! ./components/QuestCompo
 Vue.component('search-quests', __webpack_require__(/*! ./components/SearchQuests.vue */ "./resources/js/components/SearchQuests.vue")["default"]);
 Vue.component('add-quest', __webpack_require__(/*! ./components/AddQuest.vue */ "./resources/js/components/AddQuest.vue")["default"]);
 Vue.component('quests-stats', __webpack_require__(/*! ./components/QuestsStats.vue */ "./resources/js/components/QuestsStats.vue")["default"]);
+Vue.component('quest', __webpack_require__(/*! ./components/Quest.vue */ "./resources/js/components/Quest.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38393,6 +38382,45 @@ component.options.__file = "resources/js/components/AddQuest.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Quest.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Quest.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Quest.vue?vue&type=template&id=68125087& */ "./resources/js/components/Quest.vue?vue&type=template&id=68125087&");
+/* harmony import */ var _Quest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Quest.vue?vue&type=script&lang=js& */ "./resources/js/components/Quest.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Quest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Quest.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/QuestComponent.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/QuestComponent.vue ***!
@@ -38526,6 +38554,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Quest.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Quest.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Quest.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Quest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/QuestComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/QuestComponent.vue?vue&type=script&lang=js& ***!
@@ -38587,6 +38631,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddQuest_vue_vue_type_template_id_b09a8ca8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddQuest_vue_vue_type_template_id_b09a8ca8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddQuest.vue?vue&type=template&id=b09a8ca8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddQuest.vue?vue&type=template&id=b09a8ca8&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Quest.vue?vue&type=template&id=68125087&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Quest.vue?vue&type=template&id=68125087& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Quest_vue_vue_type_template_id_68125087___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Quest.vue?vue&type=template&id=68125087& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=template&id=68125087&");
 
 
 /***/ }),
@@ -38780,6 +38841,308 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=template&id=68125087&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Quest.vue?vue&type=template&id=68125087& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "w-100 d-flex align-items-center p-3 bg-white border-bottom"
+    },
+    [
+      _c("span", { staticClass: "mr-2" }, [
+        _vm.quest.quest_status.name == "Not Started"
+          ? _c(
+              "svg",
+              {
+                staticClass: "icon icon-tabler icon-tabler-circle",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "36",
+                  height: "36",
+                  viewBox: "0 0 24 24",
+                  "stroke-width": "1.5",
+                  stroke: _vm.quest.quest_status.color_hex_code,
+                  fill: "none",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.toggleQuest(_vm.quest)
+                  }
+                }
+              },
+              [
+                _c("path", { attrs: { stroke: "none", d: "M0 0h24v24H0z" } }),
+                _vm._v(" "),
+                _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } })
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.quest.quest_status.name == "In-Progress"
+          ? _c(
+              "svg",
+              {
+                staticClass: "icon icon-tabler icon-tabler-blur",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "36",
+                  height: "36",
+                  viewBox: "0 0 24 24",
+                  "stroke-width": "1.5",
+                  stroke: _vm.quest.quest_status.color_hex_code,
+                  fill: "none",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.toggleQuest(_vm.quest)
+                  }
+                }
+              },
+              [
+                _c("path", {
+                  attrs: { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }
+                }),
+                _vm._v(" "),
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z"
+                  }
+                }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 3v17" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 12h9" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 9h8" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 6h6" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 18h6" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M12 15h8" } })
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.quest.quest_status.name == "Completed"
+          ? _c(
+              "svg",
+              {
+                staticClass: "icon icon-tabler icon-tabler-circle-check",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "36",
+                  height: "36",
+                  viewBox: "0 0 24 24",
+                  "stroke-width": "1.5",
+                  stroke: "#4CAF50",
+                  fill: "none",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.toggleQuest(_vm.quest)
+                  }
+                }
+              },
+              [
+                _c("path", { attrs: { stroke: "none", d: "M0 0h24v24H0z" } }),
+                _vm._v(" "),
+                _c("circle", { attrs: { cx: "12", cy: "12", r: "9" } }),
+                _vm._v(" "),
+                _c("path", { attrs: { d: "M9 12l2 2l4 -4" } })
+              ]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "font-weight-bolder" }, [
+        _vm.editmode == false || _vm.editmode != _vm.quest.id
+          ? _c("span", [_vm._v(_vm._s(_vm.quest.title))])
+          : _vm._e(),
+        _vm.editmode == _vm.quest.id
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.quest.title,
+                  expression: "quest.title"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.quest.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.quest, "title", $event.target.value)
+                }
+              }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-auto mr-2 d-flex align-items-center" }, [
+        _c("span", [
+          _c("span", [_vm._v(_vm._s(_vm.quest.quest_category.name))]),
+          _vm._v(" "),
+          _vm.editmode != _vm.quest.id
+            ? _c(
+                "svg",
+                {
+                  staticClass: "icon icon-tabler icon-tabler-edit",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "36",
+                    height: "36",
+                    viewBox: "0 0 24 24",
+                    "stroke-width": "1.5",
+                    stroke: "#FFC107",
+                    fill: "none",
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.editmode = _vm.quest.id
+                    }
+                  }
+                },
+                [
+                  _c("path", { attrs: { stroke: "none", d: "M0 0h24v24H0z" } }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d: "M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("line", {
+                    attrs: { x1: "16", y1: "5", x2: "19", y2: "8" }
+                  })
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.editmode == _vm.quest.id
+            ? _c(
+                "svg",
+                {
+                  staticClass: "icon icon-tabler icon-tabler-checkbox",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "36",
+                    height: "36",
+                    viewBox: "0 0 24 24",
+                    "stroke-width": "1.5",
+                    stroke: "#4CAF50",
+                    fill: "none",
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateQuest(_vm.quest)
+                    }
+                  }
+                },
+                [
+                  _c("path", { attrs: { stroke: "none", d: "M0 0h24v24H0z" } }),
+                  _vm._v(" "),
+                  _c("polyline", { attrs: { points: "9 11 12 14 20 6" } }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                    }
+                  })
+                ]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("span", [
+          _c(
+            "svg",
+            {
+              staticClass: "icon icon-tabler icon-tabler-trash ml-1",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                width: "36",
+                height: "36",
+                viewBox: "0 0 24 24",
+                "stroke-width": "1.5",
+                stroke: "#FF5722",
+                fill: "none",
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.deleteQuest(_vm.quest)
+                }
+              }
+            },
+            [
+              _c("path", { attrs: { stroke: "none", d: "M0 0h24v24H0z" } }),
+              _vm._v(" "),
+              _c("line", { attrs: { x1: "4", y1: "7", x2: "20", y2: "7" } }),
+              _vm._v(" "),
+              _c("line", { attrs: { x1: "10", y1: "11", x2: "10", y2: "17" } }),
+              _vm._v(" "),
+              _c("line", { attrs: { x1: "14", y1: "11", x2: "14", y2: "17" } }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: { d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" }
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: { d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" }
+              })
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=template&id=1299d7e6&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/QuestComponent.vue?vue&type=template&id=1299d7e6& ***!
@@ -38823,352 +39186,17 @@ var render = function() {
         "div",
         { staticClass: "w-100 quest" },
         _vm._l(_vm.quests, function(quest) {
-          return _c("div", { key: quest.id }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "w-100 d-flex align-items-center p-3 bg-white border-bottom"
-              },
-              [
-                _c("span", { staticClass: "mr-2" }, [
-                  quest.quest_status.name == "Not Started"
-                    ? _c(
-                        "svg",
-                        {
-                          staticClass: "icon icon-tabler icon-tabler-circle",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: quest.quest_status.color_hex_code,
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleQuest(quest)
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                          }),
-                          _vm._v(" "),
-                          _c("circle", {
-                            attrs: { cx: "12", cy: "12", r: "9" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  quest.quest_status.name == "In-Progress"
-                    ? _c(
-                        "svg",
-                        {
-                          staticClass: "icon icon-tabler icon-tabler-blur",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: quest.quest_status.color_hex_code,
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleQuest(quest)
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              stroke: "none",
-                              d: "M0 0h24v24H0z",
-                              fill: "none"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M12 21a9.01 9.01 0 0 0 2.32 -.302a9.004 9.004 0 0 0 1.74 -16.733a9 9 0 1 0 -4.06 17.035z"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 3v17" } }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 12h9" } }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 9h8" } }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 6h6" } }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 18h6" } }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M12 15h8" } })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  quest.quest_status.name == "Completed"
-                    ? _c(
-                        "svg",
-                        {
-                          staticClass:
-                            "icon icon-tabler icon-tabler-circle-check",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: "#4CAF50",
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleQuest(quest)
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                          }),
-                          _vm._v(" "),
-                          _c("circle", {
-                            attrs: { cx: "12", cy: "12", r: "9" }
-                          }),
-                          _vm._v(" "),
-                          _c("path", { attrs: { d: "M9 12l2 2l4 -4" } })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bolder" }, [
-                  _vm.editmode == false || _vm.editmode != quest.id
-                    ? _c("span", [_vm._v(_vm._s(quest.title))])
-                    : _vm._e(),
-                  _vm.editmode == quest.id
-                    ? _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: quest.title,
-                            expression: "quest.title"
-                          }
-                        ],
-                        attrs: { type: "text" },
-                        domProps: { value: quest.title },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(quest, "title", $event.target.value)
-                          }
-                        }
-                      })
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "ml-auto mr-2 d-flex align-items-center" },
-                  [
-                    _c("span", [
-                      _vm.editmode == false || _vm.editmode != quest.id
-                        ? _c("span", [
-                            _vm._v(_vm._s(quest.quest_category.name))
-                          ])
-                        : _vm._e(),
-                      _vm.editmode == quest.id
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: quest.title,
-                                expression: "quest.title"
-                              }
-                            ],
-                            attrs: { type: "text" },
-                            domProps: { value: quest.title },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(quest, "title", $event.target.value)
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.editmode != quest.id
-                        ? _c(
-                            "svg",
-                            {
-                              staticClass: "icon icon-tabler icon-tabler-edit",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "36",
-                                height: "36",
-                                viewBox: "0 0 24 24",
-                                "stroke-width": "1.5",
-                                stroke: "#FFC107",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.editmode = quest.id
-                                }
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                              }),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("line", {
-                                attrs: { x1: "16", y1: "5", x2: "19", y2: "8" }
-                              })
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.editmode == quest.id
-                        ? _c(
-                            "svg",
-                            {
-                              staticClass:
-                                "icon icon-tabler icon-tabler-checkbox",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "36",
-                                height: "36",
-                                viewBox: "0 0 24 24",
-                                "stroke-width": "1.5",
-                                stroke: "#4CAF50",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.updateQuest(quest)
-                                }
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                              }),
-                              _vm._v(" "),
-                              _c("polyline", {
-                                attrs: { points: "9 11 12 14 20 6" }
-                              }),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
-                                }
-                              })
-                            ]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [
-                      _c(
-                        "svg",
-                        {
-                          staticClass:
-                            "icon icon-tabler icon-tabler-trash ml-1",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "36",
-                            height: "36",
-                            viewBox: "0 0 24 24",
-                            "stroke-width": "1.5",
-                            stroke: "#FF5722",
-                            fill: "none",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteQuest(quest)
-                            }
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: { stroke: "none", d: "M0 0h24v24H0z" }
-                          }),
-                          _vm._v(" "),
-                          _c("line", {
-                            attrs: { x1: "4", y1: "7", x2: "20", y2: "7" }
-                          }),
-                          _vm._v(" "),
-                          _c("line", {
-                            attrs: { x1: "10", y1: "11", x2: "10", y2: "17" }
-                          }),
-                          _vm._v(" "),
-                          _c("line", {
-                            attrs: { x1: "14", y1: "11", x2: "14", y2: "17" }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("path", {
-                            attrs: {
-                              d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
-                            }
-                          })
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]
-            )
-          ])
+          return _c(
+            "div",
+            { key: quest.id },
+            [
+              _c("quest", {
+                attrs: { quest: quest },
+                on: { getQuests: _vm.getQuests }
+              })
+            ],
+            1
+          )
         }),
         0
       )
