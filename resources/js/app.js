@@ -6,10 +6,32 @@
 
 require('./bootstrap');
 import Form from './Form'
-window.Form= Form
+import VueRouter from 'vue-router'
+import routes from './routes'
+import Vue from 'vue';
+window.Form = Form
 
 window.Vue = require('vue').default;
+Vue.use(VueRouter);
 
+// const routes = [
+//     { path: '/register', component: require('./components/Auth/Registration.vue') },
+//     { path: '/login', component: require('./components/Auth/Login.vue'), name: 'Login' },
+//     {
+//         path: '/dashboard', component: require('./components/Dashboard.vue'), name: 'Dashboard',
+//         beforeEnter: (to, form, next) => {
+//             axios.get('/api/athenticated').then(() => {
+//                 next()
+//             }).catch(() => {
+//                 return next({ name: 'Login' })
+//             })
+//         }
+//     },
+// ]
+
+// const router = new Vue({
+//     routes
+// })
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -37,4 +59,5 @@ Vue.component('quest', require('./components/Quest.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router: new VueRouter(routes)
 });
