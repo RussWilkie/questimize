@@ -7,6 +7,7 @@ use App\Exports\QuestsExport;
 use App\Imports\QuestsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
+use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -25,7 +26,7 @@ class ImportExportController extends Controller
     */
     public function export() 
     {
-        return Excel::download(new QuestsExport, 'users.xlsx');
+        return Excel::download(new QuestsExport, 'quests - '. Carbon::now()->toDateString() . '.xlsx');
     }
    
     /**
