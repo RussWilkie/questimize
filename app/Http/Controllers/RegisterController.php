@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class RegisterController extends Controller
 {
@@ -14,7 +17,7 @@ class RegisterController extends Controller
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' =>['required', 'min:6', 'confirmed']
+            'password' => ['required', 'min:6', 'confirmed']
         ]);
 
         User::create([
@@ -23,3 +26,4 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
     }
+}

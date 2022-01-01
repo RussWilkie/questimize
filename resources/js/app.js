@@ -9,6 +9,9 @@ import Form from './Form'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import Vue from 'vue';
+import Permissions from './mixins/Permissions';
+Vue.mixin(Permissions);
+
 window.Form = Form
 
 window.Vue = require('vue').default;

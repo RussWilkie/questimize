@@ -97,6 +97,8 @@
             d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
           />
         </svg>
+      </span>
+      <span v-if="$can('edit quests')">
         <svg
           @click="editmode = quest.id"
           v-if="editmode != quest.id"
@@ -139,7 +141,7 @@
           />
         </svg>
       </span>
-      <span>
+      <span v-if="$can('delete quests')">
         <svg
           @click="deleteQuest(quest)"
           xmlns="http://www.w3.org/2000/svg"
