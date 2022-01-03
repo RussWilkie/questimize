@@ -40281,10 +40281,12 @@ var render = function() {
         on: { search: _vm.filterQuests }
       }),
       _vm._v(" "),
-      _c("add-quest", {
-        attrs: { categories: _vm.categories },
-        on: { add: _vm.getQuests }
-      }),
+      _vm.$can("edit quests")
+        ? _c("add-quest", {
+            attrs: { categories: _vm.categories },
+            on: { add: _vm.getQuests }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("quests-stats", {
         attrs: {

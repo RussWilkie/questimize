@@ -5,7 +5,7 @@
       @search="filterQuests"
       :statuses="statuses"
     ></search-quests>
-    <add-quest :categories="categories" @add="getQuests"> </add-quest>
+    <add-quest v-if="$can('edit quests')" :categories="categories" @add="getQuests"> </add-quest>
     <quests-stats
       :quests="quests"
       :questsNotStarted="questsNotStarted"
