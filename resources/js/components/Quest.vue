@@ -2,7 +2,8 @@
   <div class="w-100 d-flex align-items-center p-3 bg-white border-bottom">
     <span class="mr-2">
       <svg
-        @click="toggleQuest(quest)"
+        @click="$can('edit quests') ? toggleQuest(quest) : null"
+        :style="!$can('edit quests') ? { cursor: 'default' } : {}"
         v-if="quest.quest_status.name == 'Not Started'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-circle"
@@ -19,7 +20,8 @@
         <circle cx="12" cy="12" r="9" />
       </svg>
       <svg
-        @click="toggleQuest(quest)"
+        @click="$can('edit quests') ? toggleQuest(quest) : null"
+        :style="!$can('edit quests') ? { cursor: 'default' } : {}"
         v-if="quest.quest_status.name == 'In-Progress'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-blur"
@@ -44,7 +46,8 @@
         <path d="M12 15h8" />
       </svg>
       <svg
-        @click="toggleQuest(quest)"
+        @click="$can('edit quests') ? toggleQuest(quest) : null"
+        :style="!$can('edit quests') ? { cursor: 'default' } : {}"
         v-if="quest.quest_status.name == 'Completed'"
         xmlns="http://www.w3.org/2000/svg"
         class="icon icon-tabler icon-tabler-circle-check"
