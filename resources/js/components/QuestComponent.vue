@@ -79,10 +79,7 @@ export default {
       this.quests = filter;
     },
     newQuestHeader(quest, questComparer){
-      console.log('hit');
-      console.log(questComparer);
       if(!questComparer){
-        console.log('ended');
         return false;
       }
       else{
