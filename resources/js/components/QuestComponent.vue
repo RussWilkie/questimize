@@ -14,7 +14,8 @@
     >
     </quests-stats>
     <div class="w-100 quest">
-      <div v-for="quest in quests" :key="quest.id">
+      <div v-for="(quest, index) in quests" :key="quest.id">
+        <h1 class="font-weight-black text-white" v-if="newQuestHeader(quest, quests[index-1]) || index === 0">{{quest.quest_category.name}}</h1>
         <quest :quest="quest" @getQuests="getQuests"></quest>
       </div>
     </div>
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       quests: [],
+      questHeaders: [],
       questsNotStarted: [],
       questsInProgress: [],
       questsCompleted: [],
@@ -76,6 +78,17 @@ export default {
     filterQuests(filter) {
       this.quests = filter;
     },
+    newQuestHeader(quest, questComparer){
+      console.log('hit');
+      console.log(questComparer);
+      if(!questComparer){
+        console.log('ended');
+        return false;
+      }
+      else{
+        return quest.quest_category.name !== questComparer.quest_category.name
+      }
+    }
   },
   mounted() {
     this.getQuests();
