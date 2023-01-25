@@ -52,6 +52,7 @@ Vue.component('search-quests', require('./components/SearchQuests.vue').default)
 Vue.component('add-quest', require('./components/AddQuest.vue').default);
 Vue.component('quests-stats', require('./components/QuestsStats.vue').default);
 Vue.component('quest', require('./components/Quest.vue').default);
+Vue.component('nav-bar', require('./components/Menu/NavBar.vue').default);
 
 
 /**

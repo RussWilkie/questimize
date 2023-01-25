@@ -1,11 +1,16 @@
 import Register from './components/Auth/Registration';
 import Login from './components/Auth/Login';
 import Dashboard from './components/Dashboard';
+import QuestComponent from './components/QuestComponent'
 
 export default{
     mode: 'history',
     linkActiveClass: 'font-semibold',
     routes: [
+        {
+            path: '/',
+            component: QuestComponent
+        },
         {
             path: '/register',
             component: Register
