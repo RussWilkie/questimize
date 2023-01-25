@@ -1,10 +1,13 @@
-import Register from './components/Auth/Registration';
-import Login from './components/Auth/Login';
-import Dashboard from './components/Dashboard';
+import Register from './components/Auth/Registration.vue';
+import Login from './components/Auth/Login.vue';
+import Dashboard from './components/Dashboard.vue';
+import axios from 'axios';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-export default{
-    mode: 'history',
-    linkActiveClass: 'font-semibold',
+Vue.use(VueRouter);
+
+export default new VueRouter{
     routes: [
         {
             path: '/register',
