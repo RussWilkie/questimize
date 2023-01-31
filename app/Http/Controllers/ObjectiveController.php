@@ -14,7 +14,7 @@ class ObjectiveController extends Controller
      */
     public function index()
     {
-        //
+        return Objective::latest()->get();
     }
 
     /**
@@ -35,7 +35,18 @@ class ObjectiveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+        [
+            'name' => 'required',
+            // 'type' => 'required'
+        ],
+        [
+            'name.required' => 'Objective name field is required!',
+            // 'type.required' => 'Objective type field is required!'
+        ]
+        );
+        // dd($request->all());
+        Objective::create($request->all());
     }
 
     /**
@@ -69,7 +80,9 @@ class ObjectiveController extends Controller
      */
     public function update(Request $request, Objective $objective)
     {
-        //
+        $objective = Objective::findOrFail($id);
+        $objective->update($request->all());
+        $objective->save();
     }
 
     /**
@@ -80,6 +93,8 @@ class ObjectiveController extends Controller
      */
     public function destroy(Objective $objective)
     {
-        //
+        $objective = Objective::findOrFail($id);
+        $objective->delete();
+        return Objective::latest()->get();
     }
 }

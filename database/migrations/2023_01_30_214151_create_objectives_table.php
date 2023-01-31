@@ -16,8 +16,8 @@ class CreateObjectivesTable extends Migration
         Schema::create('objectives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('skill');
-            $table->integer('xp_earned');
+            $table->string('skill')->nullable();
+            $table->integer('xp_earned')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('completed_at')->nullable();
             $table->timestamp('archived_at')->nullable();
