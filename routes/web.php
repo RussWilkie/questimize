@@ -25,3 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('export', 'App\Http\Controllers\ImportExportController@export')->name('export');
 Route::get('importExportView', 'App\Http\Controllers\ImportExportController@importExportView');
 Route::post('import', 'App\Http\Controllers\ImportExportController@import')->name('import');
+
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
