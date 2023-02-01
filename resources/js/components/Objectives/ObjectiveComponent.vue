@@ -1,16 +1,26 @@
 <template>
-    <div class="w-25">
+    <div>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" type="text"
+                <input v-model="form.name" placeholder="Objective name" :class="{ 'is-invalid': form.errors.has('name') }" type="text"
                     class="form-control form-control-lg" @keydown="form.errors.clear('name')"
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                    aria-label="Objective name" aria-describedby="button-addon2">
+                    <input v-model="form.skill" placeholder="Related skill" :class="{ 'is-invalid': form.errors.has('skill') }" type="text"
+                    class="form-control form-control-lg" @keydown="form.errors.clear('skill')"
+                    aria-label="Related skill" aria-describedby="button-addon2">
+                    <input v-model="form.xp_value" placeholder="XP Value" :class="{ 'is-invalid': form.errors.has('xp_value') }" type="number"
+                    class="form-control form-control-lg" @keydown="form.errors.clear('xp_value')"
+                    aria-label="XP Value" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit" id="button-addon2">Add this to your list</button>
                 </div>
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
+                <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('skill')"
+                v-text="form.errors.get('skill')"></span>
+                <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('xp_value')"
+                v-text="form.errors.get('xp_value')"></span>
         </form>
         <div class="w-100 Objective">
             <div v-for="Objective in Objectives" :key="Objective.id"
@@ -83,6 +93,8 @@ export default {
             Objectives: '',
             form: new Form({
                 name: '',
+                skill: '',
+                xp_value: '',
             })
         }
     },
@@ -128,6 +140,8 @@ export default {
         saveData() {
             let data = new FormData();
             data.append('name', this.form.name)
+            data.append('name', this.form.skill)
+            data.append('name', this.form.xp_value)
             axios.post('/api/objective', data).then((res) => {
                 this.form.reset()
                 this.getObjectives()

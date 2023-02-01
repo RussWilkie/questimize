@@ -38,14 +38,15 @@ class ObjectiveController extends Controller
         $this->validate($request,
         [
             'name' => 'required',
-            // 'type' => 'required'
+            'skill' => 'required',
+            'xp_value' => 'required'
         ],
         [
             'name.required' => 'Objective name field is required!',
-            // 'type.required' => 'Objective type field is required!'
+            'skill.required' => 'Related skill field is required!',
+            'xp_value.required' => 'XP value is required!',
         ]
         );
-        // dd($request->all());
         Objective::create($request->all());
     }
 
