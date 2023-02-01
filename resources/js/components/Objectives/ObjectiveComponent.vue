@@ -12,17 +12,17 @@
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
         </form>
-        <div class="w-100 todo">
-            <div v-for="todo in todos" :key="todo.id"
+        <div class="w-100 Objective">
+            <div v-for="Objective in Objectives" :key="Objective.id"
                 class="w-100 d-flex align-items-center p-3 bg-white border-bottom">
                 <span class="mr-2">
-                    <svg v-on:click="toggleTodo(todo)" v-if="todo.completed == false" xmlns="http://www.w3.org/2000/svg"
+                    <svg v-on:click="toggleObjective(Objective)" v-if="Objective.completed == false" xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icon-tabler-circle" width="36" height="36" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#FFC107" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <circle cx="12" cy="12" r="9" />
                     </svg>
-                    <svg v-if="todo.completed == true" v-on:click="toggleTodo(todo)" xmlns="http://www.w3.org/2000/svg"
+                    <svg v-if="Objective.completed == true" v-on:click="toggleObjective(Objective)" xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icon-tabler-circle-check" width="36" height="36" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -32,13 +32,13 @@
                 </span>
 
                 <div class="font-weight-bolder"><span
-                        v-if="editmode == false || editmode != todo.id">{{ todo.name }}</span><input
-                        v-if="editmode == todo.id" v-model="todo.name" type="text">
+                        v-if="editmode == false || editmode != Objective.id">{{ Objective.name }}</span><input
+                        v-if="editmode == Objective.id" v-model="Objective.name" type="text">
                 </div>
 
                 <div class="ml-auto mr-2 d-flex align-items-center"><span>
 
-                        <svg v-on:click="editmode = todo.id" v-if="editmode != todo.id"
+                        <svg v-on:click="editmode = Objective.id" v-if="editmode != Objective.id"
                             xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="36"
                             height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -47,7 +47,7 @@
                             <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
                             <line x1="16" y1="5" x2="19" y2="8" />
                         </svg>
-                        <svg v-if="editmode == todo.id" v-on:click="updateTodo(todo)" xmlns="http://www.w3.org/2000/svg"
+                        <svg v-if="editmode == Objective.id" v-on:click="updateObjective(Objective)" xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-checkbox" width="36" height="36" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -57,7 +57,7 @@
                         </svg>
                     </span>
                     <span>
-                        <svg v-on:click="deleteTodo(todo)" xmlns="http://www.w3.org/2000/svg"
+                        <svg v-on:click="deleteObjective(Objective)" xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-trash ml-1" width="36" height="36" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="#FF5722" fill="none" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -80,23 +80,23 @@ export default {
     data() {
         return {
             editmode: false,
-            todos: '',
+            Objectives: '',
             form: new Form({
                 name: '',
             })
         }
     },
     methods: {
-        deleteTodo(e) {
+        deleteObjective(e) {
             let data = new FormData();
             data.append('_method', 'DELETE')
             axios.post('/api/objective/' + e.id, data).then((res) => {
-                this.todos = res.data
+                this.Objectives = res.data
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors)
             })
         },
-        updateTodo(e) {
+        updateObjective(e) {
             this.editmode = false
             let data = new FormData();
             data.append('_method', 'PATCH')
@@ -106,7 +106,7 @@ export default {
                     this.form.errors.record(error.response.data.errors)
                 })
         },
-        toggleTodo(e) {
+        toggleObjective(e) {
             e.completed = !e.completed
             let data = new FormData();
             data.append('_method', 'PATCH')
@@ -118,9 +118,9 @@ export default {
             }
             axios.post('/api/objective/' + e.id, data)
         },
-        getTodos() {
+        getObjectives() {
             axios.get('/api/objective').then((res) => {
-                this.todos = res.data
+                this.Objectives = res.data
             }).catch((error) => {
                 console.log(error)
             })
@@ -130,14 +130,14 @@ export default {
             data.append('name', this.form.name)
             axios.post('/api/objective', data).then((res) => {
                 this.form.reset()
-                this.getTodos()
+                this.getObjectives()
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors)
             })
         }
     },
     mounted() {
-        this.getTodos()
+        this.getObjectives()
     }
 }
 </script>
