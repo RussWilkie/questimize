@@ -78,7 +78,7 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Objective $objective)
+    public function update(Request $request, $id)
     {
         $objective = Objective::findOrFail($id);
         $objective->update($request->all());
@@ -91,7 +91,7 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Objective $objective)
+    public function destroy(Objective $id)
     {
         $objective = Objective::findOrFail($id);
         $objective->delete();
