@@ -41,9 +41,9 @@
                     </svg>
                 </span>
 
-                <div class="font-weight-bolder"><span
-                        v-if="editmode == false || editmode != Objective.id">{{ Objective.name }}</span><input
-                        v-if="editmode == Objective.id" v-model="Objective.name" type="text">
+                <div class="font-weight-bolder">
+                    <span v-if="editmode == false || editmode != Objective.id">{{ Objective.name }}</span>
+                    <input v-if="editmode == Objective.id" v-model="Objective.name" type="text">
                 </div>
 
                 <div class="ml-auto mr-2 d-flex align-items-center"><span>
@@ -140,8 +140,8 @@ export default {
         saveData() {
             let data = new FormData();
             data.append('name', this.form.name)
-            data.append('name', this.form.skill)
-            data.append('name', this.form.xp_value)
+            data.append('skill', this.form.skill)
+            data.append('xp_value', this.form.xp_value)
             axios.post('/api/objective', data).then((res) => {
                 this.form.reset()
                 this.getObjectives()

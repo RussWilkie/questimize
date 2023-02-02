@@ -2250,8 +2250,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
       var data = new FormData();
       data.append('name', this.form.name);
-      data.append('name', this.form.skill);
-      data.append('name', this.form.xp_value);
+      data.append('skill', this.form.skill);
+      data.append('xp_value', this.form.xp_value);
       axios.post('/api/objective', data).then(function (res) {
         _this4.form.reset();
         _this4.getObjectives();
@@ -3136,7 +3136,7 @@ var render = function render() {
       }
     })]) : _vm._e()]), _vm._v(" "), _c("div", {
       staticClass: "font-weight-bolder"
-    }, [_vm.editmode == false || _vm.editmode != Objective.id ? _c("span", [_vm._v(_vm._s(Objective.name))]) : _vm._e(), _vm.editmode == Objective.id ? _c("input", {
+    }, [_vm.editmode == false || _vm.editmode != Objective.id ? _c("span", [_vm._v(_vm._s(Objective.name))]) : _vm._e(), _vm._v(" "), _vm.editmode == Objective.id ? _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
