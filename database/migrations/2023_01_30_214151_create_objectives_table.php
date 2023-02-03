@@ -18,6 +18,7 @@ class CreateObjectivesTable extends Migration
             $table->string('name');
             $table->string('skill')->nullable();
             $table->integer('xp_value')->nullable();
+            $table->string('description')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('completed_at')->nullable();
             $table->timestamp('archived_at')->nullable();

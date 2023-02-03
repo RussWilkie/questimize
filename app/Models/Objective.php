@@ -10,5 +10,5 @@ class Objective extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['name', 'type', 'xp_earned', 'description', 'completed_at', 'archived_at'];
+    protected $fillable = ['name', 'skill', 'xp_value', 'description', 'completed_at', 'archived_at'];
 }

@@ -35,7 +35,6 @@ class ObjectiveController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request);
         $this->validate($request,
         [
             'name' => 'required',

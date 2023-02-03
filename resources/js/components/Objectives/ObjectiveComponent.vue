@@ -41,8 +41,8 @@
                     </svg>
                 </span>
 
-                <div class="font-weight-bolder">
-                    <span v-if="editmode == false || editmode != Objective.id">{{ Objective.name }}</span>
+                <div>
+                    <span v-if="editmode == false || editmode != Objective.id" class="font-weight-bolder">{{ Objective.name }}</span>
                     <input v-if="editmode == Objective.id" v-model="Objective.name" type="text">
                 </div>
 
@@ -79,7 +79,10 @@
                             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                         </svg></span>
                 </div>
-
+                <div>
+                <span v-if="editmode == false || editmode != Objective.id" class="col-md-2 offset-md-3">{{ Objective.skill }}</span>
+                    <span v-if="editmode == false || editmode != Objective.id">{{ Objective.xp_value }}</span>
+                </div>
             </div>
         </div>
     </div>

@@ -3134,9 +3134,9 @@ var render = function render() {
       attrs: {
         d: "M9 12l2 2l4 -4"
       }
-    })]) : _vm._e()]), _vm._v(" "), _c("div", {
+    })]) : _vm._e()]), _vm._v(" "), _c("div", [_vm.editmode == false || _vm.editmode != Objective.id ? _c("span", {
       staticClass: "font-weight-bolder"
-    }, [_vm.editmode == false || _vm.editmode != Objective.id ? _c("span", [_vm._v(_vm._s(Objective.name))]) : _vm._e(), _vm._v(" "), _vm.editmode == Objective.id ? _c("input", {
+    }, [_vm._v(_vm._s(Objective.name))]) : _vm._e(), _vm._v(" "), _vm.editmode == Objective.id ? _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -3278,7 +3278,9 @@ var render = function render() {
       attrs: {
         d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
       }
-    })])])])]);
+    })])])]), _vm._v(" "), _c("div", [_vm.editmode == false || _vm.editmode != Objective.id ? _c("span", {
+      staticClass: "col-md-2 offset-md-3"
+    }, [_vm._v(_vm._s(Objective.skill))]) : _vm._e(), _vm._v(" "), _vm.editmode == false || _vm.editmode != Objective.id ? _c("span", [_vm._v(_vm._s(Objective.xp_value))]) : _vm._e()])]);
   }), 0)]);
 };
 var staticRenderFns = [function () {
