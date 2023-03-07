@@ -2,39 +2,51 @@
     <div>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="Objective name" :class="{ 'is-invalid': form.errors.has('name') }" type="text"
-                    class="form-control form-control-lg" @keydown="form.errors.clear('name')"
-                    aria-label="Objective name" aria-describedby="button-addon2">
-                    <input v-model="form.skill" placeholder="Related skill" :class="{ 'is-invalid': form.errors.has('skill') }" type="text"
-                    class="form-control form-control-lg" @keydown="form.errors.clear('skill')"
-                    aria-label="Related skill" aria-describedby="button-addon2">
-                    <input v-model="form.xp_value" placeholder="XP Value" :class="{ 'is-invalid': form.errors.has('xp_value') }" type="number"
-                    class="form-control form-control-lg" @keydown="form.errors.clear('xp_value')"
-                    aria-label="XP Value" aria-describedby="button-addon2">
+                <input v-model="form.name" placeholder="Objective name"
+                    :class="{ 'is-invalid': form.errors.has('name') }" type="text" class="form-control form-control-lg"
+                    @keydown="form.errors.clear('name')" aria-label="Objective name" aria-describedby="button-addon2">
+                <input v-model="form.skill" placeholder="Related skill"
+                    :class="{ 'is-invalid': form.errors.has('skill') }" type="text" class="form-control form-control-lg"
+                    @keydown="form.errors.clear('skill')" aria-label="Related skill" aria-describedby="button-addon2">
+                <input v-model="form.xp_value" placeholder="XP Value"
+                    :class="{ 'is-invalid': form.errors.has('xp_value') }" type="number"
+                    class="form-control form-control-lg" @keydown="form.errors.clear('xp_value')" aria-label="XP Value"
+                    aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit" id="button-addon2">Add this to your list</button>
                 </div>
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
-                <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('skill')"
+            <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('skill')"
                 v-text="form.errors.get('skill')"></span>
-                <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('xp_value')"
+            <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('xp_value')"
                 v-text="form.errors.get('xp_value')"></span>
         </form>
+
         <div class="w-100 Objective">
-            <div v-for="Objective in Objectives" :key="Objective.id"
+            <v-card v-for="Objective in Objectives" :key="Objective.id" elevation="2">
+                <v-card-title>{{Objective.name}}
+                </v-card-title>
+                <v-card-subtitle>{{Objective.xp_value }}
+                </v-card-subtitle>
+                <v-card-text>{{ Objective.skill }}
+                </v-card-text>
+            </v-card>
+            <!-- <div v-for="Objective in Objectives" :key="Objective.id"
                 class="w-100 d-flex align-items-center p-3 bg-white border-bottom">
                 <span class="mr-2">
-                    <svg v-on:click="toggleObjective(Objective)" v-if="Objective.completed == false" xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-circle" width="36" height="36" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="#FFC107" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg v-on:click="toggleObjective(Objective)" v-if="Objective.completed == false"
+                        xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle" width="36"
+                        height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <circle cx="12" cy="12" r="9" />
                     </svg>
-                    <svg v-if="Objective.completed == true" v-on:click="toggleObjective(Objective)" xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-circle-check" width="36" height="36" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg v-if="Objective.completed == true" v-on:click="toggleObjective(Objective)"
+                        xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="36"
+                        height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <circle cx="12" cy="12" r="9" />
                         <path d="M9 12l2 2l4 -4" />
@@ -42,7 +54,9 @@
                 </span>
 
                 <div>
-                    <span v-if="editmode == false || editmode != Objective.id" class="font-weight-bolder">{{ Objective.name }}</span>
+                    <span v-if="editmode == false || editmode != Objective.id" class="font-weight-bolder">{{
+                        Objective.name
+                    }}</span>
                     <input v-if="editmode == Objective.id" v-model="Objective.name" type="text">
                 </div>
 
@@ -57,10 +71,10 @@
                             <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
                             <line x1="16" y1="5" x2="19" y2="8" />
                         </svg>
-                        <svg v-if="editmode == Objective.id" v-on:click="updateObjective(Objective)" xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-checkbox" width="36" height="36" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="#4CAF50" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                        <svg v-if="editmode == Objective.id" v-on:click="updateObjective(Objective)"
+                            xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checkbox" width="36"
+                            height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4CAF50" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" />
                             <polyline points="9 11 12 14 20 6" />
                             <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
@@ -80,10 +94,12 @@
                         </svg></span>
                 </div>
                 <div>
-                <span v-if="editmode == false || editmode != Objective.id" class="col-md-2 offset-md-3">{{ Objective.skill }}</span>
+                    <span v-if="editmode == false || editmode != Objective.id" class="col-md-2 offset-md-3">{{
+                        Objective.skill
+                    }}</span>
                     <span v-if="editmode == false || editmode != Objective.id">{{ Objective.xp_value }}</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

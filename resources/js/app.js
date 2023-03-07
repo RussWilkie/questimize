@@ -4,12 +4,16 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import Vue from 'vue';
 import Permissions from './mixins/Permissions';
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+
 Vue.mixin(Permissions);
 
 window.Form = Form
 
 window.Vue = require('vue').default;
 Vue.use(VueRouter);
+Vue.use(Vuetify)
 
 
 Vue.component('quest-component', require('./components/Quests/QuestComponent.vue').default);

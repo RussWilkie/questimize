@@ -3,6 +3,7 @@ import Login from './components/Auth/Login';
 import Dashboard from './components/Dashboard';
 import QuestComponent from './components/Quests/QuestComponent';
 import ObjectiveComponent from './components/Objectives/ObjectiveComponent';
+import SkillsPage from './components/Skills/SkillsPage';
 
 export default{
     mode: 'history',
@@ -15,6 +16,10 @@ export default{
         {
             path: '/objectives',
             component: ObjectiveComponent
+        },
+        {
+            path: '/skills',
+            component: SkillsPage
         },
         {
             path: '/register',

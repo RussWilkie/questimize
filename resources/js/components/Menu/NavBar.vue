@@ -3,6 +3,7 @@
     <nav id="vue">
         <div class="menu-item"><router-link to="/">Home</router-link></div>
         <div class="menu-item"><router-link to="/objectives">Objectives</router-link></div>
+        <div class="menu-item"><router-link to="/skills">Skills</router-link></div>
         <div class="menu-item"><router-link to="/login">Login</router-link></div>
     </nav>
 </template>
