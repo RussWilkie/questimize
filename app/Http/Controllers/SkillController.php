@@ -14,7 +14,7 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+        return Skill::all();
     }
 
     /**
@@ -35,7 +35,19 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'name' => 'required'
+            ],
+            [
+                'name.required' => 'Skill input field is required!'
+            ]
+        );
+
+        $data = $request->all();
+        $skill= Skill::create($request->all());
+        $skill->save();
     }
 
     /**
