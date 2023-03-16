@@ -1,21 +1,37 @@
 <template>
     <div>
-       <v-tabs>
-        <v-tab>Skills</v-tab>
-        <v-tab-item><List></List></v-tab-item>
-        <v-tab>Subskills</v-tab>
-        <v-tab-item><h1>Test</h1></v-tab-item>
-       </v-tabs>
+        <h1>Skills List</h1>
+        <form @submit.prevent="saveData">
+            <div class="input-group mb-3 w-100">
+                <input v-model="form.name" placeholder="Skill name"
+                    :class="{ 'is-invalid': form.errors.has('name') }" type="text" class="form-control form-control-lg"
+                    @keydown="form.errors.clear('name')" aria-label="Skill name" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit" id="button-addon2">Add New Skill</button>
+                </div>
+            </div>
+            <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
+                v-text="form.errors.get('name')"></span>
+        </form>
+        <div class="w-100 Skill">
+            <v-card v-for="Skill in Skills" :key="Skill.id" elevation="2">
+                <v-card-title>{{Skill.name}}
+                </v-card-title>
+                <v-card-subtitle>Level: {{Skill.level}}
+                </v-card-subtitle>
+                <v-card-text>XP: {{Skill.xp_earned }} / {{ Skill.xp_to_next_level }}
+                </v-card-text>
+            </v-card>
+        
+        </div>
     </div>
 </template>
 
 <script>
 import SkillsTabs from './SkillsTabs.vue';
-import List from './List.vue';
 export default {
     components: {
-      SkillsTabs,
-      List
+      SkillsTabs
     },
     data() {
         return {

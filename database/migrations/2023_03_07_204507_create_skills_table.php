@@ -17,7 +17,7 @@ class CreateSkillsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('level')->default(1);
-            $table->integer('xp_earned')->default(1);
+            $table->integer('xp_earned')->default(0);
             $table->integer('xp_to_next_level')->default(100);
         });
     }

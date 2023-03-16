@@ -26,5 +26,6 @@ Vue.component('nav-bar', require('./components/Menu/NavBar.vue').default);
 
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify(),
     router: new VueRouter(routes)
 });

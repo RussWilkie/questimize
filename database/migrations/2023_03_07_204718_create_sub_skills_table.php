@@ -19,7 +19,7 @@ class CreateSubSkillsTable extends Migration
             $table->foreign('main_skill_id')->references('id')->on('skills');
             $table->string('name');
             $table->integer('level')->default(1);
-            $table->integer('xp_earned')->default(1);
+            $table->integer('xp_earned')->default(0);
             $table->integer('xp_to_next_level')->default(1);
         });
     }
