@@ -1,5 +1,5 @@
 require('./bootstrap');
-import Form from './Form'
+import Form from './form'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import Vue from 'vue';

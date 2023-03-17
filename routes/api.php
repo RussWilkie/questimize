@@ -6,6 +6,7 @@ use App\Http\Controllers\QuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SubSkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +36,6 @@ Route::post('logout', 'LoginController@logout');
 Route::resource('quest', QuestController::class);
 Route::resource('objective', ObjectiveController::class);
 Route::resource('skill', SkillController::class);
+Route::resource('subskill', SubSkillController::class);
 
 Route::post('search','App\Http\Controllers\QuestController@search');

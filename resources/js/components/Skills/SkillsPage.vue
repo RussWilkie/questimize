@@ -2,82 +2,21 @@
     <div>
        <v-tabs>
         <v-tab>Skills</v-tab>
-        <v-tab-item><List></List></v-tab-item>
+        <v-tab-item><SkillsList></SkillsList></v-tab-item>
         <v-tab>Subskills</v-tab>
-        <v-tab-item><h1>Test</h1></v-tab-item>
+        <v-tab-item><SubSkillsList></SubSkillsList></v-tab-item>
        </v-tabs>
     </div>
 </template>
 
 <script>
-import SkillsTabs from './SkillsTabs.vue';
-import List from './List.vue';
+import SkillsList from './SkillsList.vue';
+import SubSkillsList from './Subskills/SubSkillsList.vue';
+
 export default {
     components: {
-      SkillsTabs,
-      List
-    },
-    data() {
-        return {
-            editmode: false,
-            Skills: '',
-            form: new Form({
-                name: '',
-            })
-        }
-    },
-    methods: {
-        deleteSkill(e) {
-            let data = new FormData();
-            data.append('_method', 'DELETE')
-            axios.post('/api/skill/' + e.id, data).then((res) => {
-                this.Skills = res.data
-            }).catch((error) => {
-                this.form.errors.record(error.response.data.errors)
-            })
-        },
-        updateSkill(e) {
-            this.editmode = false
-            let data = new FormData();
-            data.append('_method', 'PATCH')
-            data.append('name', e.name)
-            axios.post('/api/skill/' + e.id, data)
-                .catch((error) => {
-                    this.form.errors.record(error.response.data.errors)
-                })
-        },
-        toggleSkill(e) {
-            e.completed = !e.completed
-            let data = new FormData();
-            data.append('_method', 'PATCH')
-            if (e.completed == true) {
-                data.append('completed', 1);
-            }
-            if (e.completed == false) {
-                data.append('completed', 0)
-            }
-            axios.post('/api/skill/' + e.id, data)
-        },
-        getSkills() {
-            axios.get('/api/skill').then((res) => {
-                this.Skills = res.data
-            }).catch((error) => {
-                console.log(error)
-            })
-        },
-        saveData() {
-            let data = new FormData();
-            data.append('name', this.form.name)
-            axios.post('/api/skill', data).then((res) => {
-                this.form.reset()
-                this.getSkills()
-            }).catch((error) => {
-                this.form.errors.record(error.response.data.errors)
-            })
-        }
-    },
-    mounted() {
-        this.getSkills()
+      SkillsList,
+      SubSkillsList
     }
 }
 </script>

@@ -14,7 +14,7 @@ class SubSkillController extends Controller
      */
     public function index()
     {
-        //
+        return SubSkill::all();
     }
 
     /**
@@ -35,7 +35,19 @@ class SubSkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'name' => 'required'
+            ],
+            [
+                'name.required' => 'Subskill input field is required!'
+            ]
+        );
+
+        $data = $request->all();
+        $skill= SubSkill::create($request->all());
+        $skill->save();
     }
 
     /**
