@@ -3,9 +3,9 @@
         <h1>Skills List</h1>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="Skill name"
+                <input v-model="form.name" placeholder="skill name"
                     :class="{ 'is-invalid': form.errors.has('name') }" type="text" class="form-control form-control-lg"
-                    @keydown="form.errors.clear('name')" aria-label="Skill name" aria-describedby="button-addon2">
+                    @keydown="form.errors.clear('name')" aria-label="skill name" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit" id="button-addon2">Add New Skill</button>
                 </div>
@@ -14,12 +14,12 @@
                 v-text="form.errors.get('name')"></span>
         </form>
         <div class="w-100 Skill">
-            <v-card v-for="Skill in Skills" :key="Skill.id" elevation="2">
-                <v-card-title>{{Skill.name}}
+            <v-card v-for="skill in skills" :key="skill.id" elevation="2">
+                <v-card-title>{{skill.name}}
                 </v-card-title>
-                <v-card-subtitle>Level: {{Skill.level}}
+                <v-card-subtitle>Level: {{skill.level}}
                 </v-card-subtitle>
-                <v-card-text>XP: {{Skill.xp_earned }} / {{ Skill.xp_to_next_level }}
+                <v-card-text>XP: {{skill.xp_earned }} / {{ skill.xp_to_next_level }}
                 </v-card-text>
             </v-card>
         
@@ -29,10 +29,12 @@
 
 <script>
 export default {
+    props: {
+        skills: Array,
+    },
     data() {
         return {
             editmode: false,
-            Skills: '',
             form: new Form({
                 name: '',
             })
@@ -43,7 +45,7 @@ export default {
             let data = new FormData();
             data.append('_method', 'DELETE')
             axios.post('/api/skill/' + e.id, data).then((res) => {
-                this.Skills = res.data
+                this.skills = res.data
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors)
             })
@@ -70,13 +72,6 @@ export default {
             }
             axios.post('/api/skill/' + e.id, data)
         },
-        getSkills() {
-            axios.get('/api/skill').then((res) => {
-                this.Skills = res.data
-            }).catch((error) => {
-                console.log(error)
-            })
-        },
         saveData() {
             let data = new FormData();
             data.append('name', this.form.name)
@@ -88,8 +83,5 @@ export default {
             })
         }
     },
-    mounted() {
-        this.getSkills()
-    }
 }
 </script>

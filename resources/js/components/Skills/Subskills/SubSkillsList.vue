@@ -12,6 +12,24 @@
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
+                <select
+          v-model="form.skills"
+          id="skills"
+          class="form-control form-control-lg"
+          name="skills"
+        >
+          <option v-for="skill in addSkills" :key="skill.value">
+            {{ skill.name }}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-success" type="submit" id="button-addon2">
+            Add this to your list
+          </button>
+        </div>
+
+        <!--Edit this to assign skill to subskill-->
+                
         </form>
         <div class="w-100 SubSkill">
             <v-card v-for="SubSkill in SubSkills" :key="SubSkill.id" elevation="2">
@@ -29,15 +47,24 @@
 
 <script>
 export default {
+    props: {
+        skills: Array,
+    },
     data() {
         return {
-            editmode: false,
             SubSkills: '',
             form: new Form({
                 name: '',
             })
         }
     },
+    computed: {
+    addSkills: function () {
+      return this.skills.filter((skill) => {
+        return skill.name != "All Skills";
+      });
+    },
+  },
     methods: {
         deleteSubSkill(e) {
             let data = new FormData();

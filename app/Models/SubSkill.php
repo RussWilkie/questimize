@@ -10,5 +10,9 @@ class SubSkill extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'main_skill_id'];
+
+    public function questStatus(){
+        return $this->belongsTo('App\Models\Skill');
+    }
 }

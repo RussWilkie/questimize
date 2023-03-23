@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use App\Models\SubSkill;
 
 class SkillController extends Controller
 {
@@ -15,6 +16,7 @@ class SkillController extends Controller
     public function index()
     {
         return Skill::all();
+        // return Skill::with('subSkill')->get();
     }
 
     /**

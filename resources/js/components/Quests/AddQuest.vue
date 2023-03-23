@@ -70,7 +70,6 @@ export default {
         .then((res) => {
           this.form.reset();
           this.$emit("add");
-          //   this.getQuests();
           this.form.category = category;
         })
         .catch((error) => {
