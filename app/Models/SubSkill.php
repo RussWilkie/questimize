@@ -12,7 +12,7 @@ class SubSkill extends Model
     public $timestamps = false;
     protected $fillable = ['name', 'main_skill_id'];
 
-    public function questStatus(){
+    public function skill(){
         return $this->belongsTo('App\Models\Skill');
     }
 }

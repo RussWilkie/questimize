@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SubSkill;
 use Illuminate\Http\Request;
+use App\Models\Skill;
 
 class SubSkillController extends Controller
 {
@@ -38,16 +39,20 @@ class SubSkillController extends Controller
         $this->validate(
             $request,
             [
-                'name' => 'required'
+                'name' => 'required',
+                'skill' => 'required'
             ],
             [
-                'name.required' => 'Subskill input field is required!'
+                'name.required' => 'Subskill input field is required!',
+                'skill.required' => 'Skill selection is required!'
             ]
         );
 
         $data = $request->all();
-        $skill= SubSkill::create($request->all());
-        $skill->save();
+        $skill = Skill::where('name', '=', $data['skill'])->first();
+        $subSkill= SubSkill::create($request->all());
+        $subSkill->skill()->associate($skill);
+        $subSkill->save();
     }
 
     /**

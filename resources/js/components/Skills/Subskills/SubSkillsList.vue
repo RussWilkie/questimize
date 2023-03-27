@@ -3,44 +3,36 @@
         <h1>SubSkills List</h1>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="SubSkill name"
-                    :class="{ 'is-invalid': form.errors.has('name') }" type="text" class="form-control form-control-lg"
-                    @keydown="form.errors.clear('name')" aria-label="SubSkill name" aria-describedby="button-addon2">
+                <input v-model="form.name" placeholder="SubSkill name" :class="{ 'is-invalid': form.errors.has('name') }"
+                    type="text" class="form-control form-control-lg" @keydown="form.errors.clear('name')"
+                    aria-label="SubSkill name" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit" id="button-addon2">Add New SubSkill</button>
                 </div>
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
-                <select
-          v-model="form.skills"
-          id="skills"
-          class="form-control form-control-lg"
-          name="skills"
-        >
-          <option v-for="skill in addSkills" :key="skill.value">
-            {{ skill.name }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-success" type="submit" id="button-addon2">
-            Add this to your list
-          </button>
-        </div>
-
-        <!--Edit this to assign skill to subskill-->
-                
+            <select v-model="form.skills" id="skills" class="form-control form-control-lg" name="skills">
+                <option v-for="skill in addSkills" :key="skill.value">
+                    {{ skill.name }}
+                </option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit" id="button-addon2">
+                    Add this to your list
+                </button>
+            </div>
         </form>
         <div class="w-100 SubSkill">
-            <v-card v-for="SubSkill in SubSkills" :key="SubSkill.id" elevation="2">
-                <v-card-title>{{SubSkill.name}}
+            <v-card v-for="subSkill in subSkills" :key="subSkill.id" elevation="2">
+                <v-card-title>{{ subSkill.name }}
                 </v-card-title>
-                <v-card-subtitle>Level: {{SubSkill.level}}
+                <v-card-subtitle>Level: {{ subSkill.level }}
                 </v-card-subtitle>
-                <v-card-text>XP: {{SubSkill.xp_earned }} / {{ SubSkill.xp_to_next_level }}
+                <v-card-text>XP: {{ subSkill.xp_earned }} / {{ subSkill.xp_to_next_level }}
                 </v-card-text>
             </v-card>
-        
+            <!-- To do: Create a vue model that will populate skills name into this subskill -->
         </div>
     </div>
 </template>
@@ -52,25 +44,26 @@ export default {
     },
     data() {
         return {
-            SubSkills: '',
+            subSkills: '',
             form: new Form({
                 name: '',
+                skill: 'Adventuring',
             })
         }
     },
     computed: {
-    addSkills: function () {
-      return this.skills.filter((skill) => {
-        return skill.name != "All Skills";
-      });
+        addSkills: function () {
+            return this.skills.filter((skill) => {
+                return skill.name != "All Skills";
+            });
+        },
     },
-  },
     methods: {
         deleteSubSkill(e) {
             let data = new FormData();
             data.append('_method', 'DELETE')
             axios.post('/api/subskill/' + e.id, data).then((res) => {
-                this.SubSkills = res.data
+                this.subSkills = res.data
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors)
             })
@@ -80,6 +73,7 @@ export default {
             let data = new FormData();
             data.append('_method', 'PATCH')
             data.append('name', e.name)
+            data.append('skill', e.skill)
             axios.post('/api/subskill/' + e.id, data)
                 .catch((error) => {
                     this.form.errors.record(error.response.data.errors)
@@ -99,7 +93,7 @@ export default {
         },
         getSubSkills() {
             axios.get('/api/subskill').then((res) => {
-                this.SubSkills = res.data
+                this.subSkills = res.data
             }).catch((error) => {
                 console.log(error)
             })
@@ -107,6 +101,7 @@ export default {
         saveData() {
             let data = new FormData();
             data.append('name', this.form.name)
+            data.append('skill', this.form.skill)
             axios.post('/api/subskill', data).then((res) => {
                 this.form.reset()
                 this.getSubSkills()

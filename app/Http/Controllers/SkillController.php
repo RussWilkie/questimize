@@ -16,7 +16,6 @@ class SkillController extends Controller
     public function index()
     {
         return Skill::all();
-        // return Skill::with('subSkill')->get();
     }
 
     /**
