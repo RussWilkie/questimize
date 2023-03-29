@@ -3772,9 +3772,6 @@ var render = function render() {
   }), _vm._v(" "), _vm.$can("edit quests") ? _c("add-quest", {
     attrs: {
       categories: _vm.categories
-    },
-    on: {
-      add: _vm.getQuests
     }
   }) : _vm._e(), _vm._v(" "), _c("quests-stats", {
     attrs: {
@@ -4068,9 +4065,6 @@ var render = function render() {
   })], 1), _vm._v(" "), _c("v-tab", [_vm._v("Subskills")]), _vm._v(" "), _c("v-tab-item", [_c("SubSkillsList", {
     attrs: {
       skills: _vm.skills
-    },
-    on: {
-      add: _vm.getSkills
     }
   })], 1)], 1)], 1);
 };
