@@ -2713,7 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     addSkills: function addSkills() {
       return this.skills.filter(function (skill) {
-        return skill.name != "All Skills";
+        return skill.name != "";
       });
     }
   },
@@ -2767,6 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/subskill', data).then(function (res) {
         _this4.form.reset();
         _this4.getSubSkills();
+        _this4.form.skill = _this4.form.skill;
       })["catch"](function (error) {
         _this4.form.errors.record(error.response.data.errors);
       });
@@ -4067,6 +4068,9 @@ var render = function render() {
   })], 1), _vm._v(" "), _c("v-tab", [_vm._v("Subskills")]), _vm._v(" "), _c("v-tab-item", [_c("SubSkillsList", {
     attrs: {
       skills: _vm.skills
+    },
+    on: {
+      add: _vm.getSkills
     }
   })], 1)], 1)], 1);
 };
@@ -4129,7 +4133,7 @@ var render = function render() {
         _vm.$set(_vm.form, "name", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm.form.errors.has("name") ? _c("span", {
+  })]), _vm._v(" "), _vm.form.errors.has("name") ? _c("span", {
     staticClass: "text-danger pt-3 pb-3",
     staticStyle: {
       "font-size": "20px"
@@ -4141,8 +4145,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.form.skills,
-      expression: "form.skills"
+      value: _vm.form.skill,
+      expression: "form.skill"
     }],
     staticClass: "form-control form-control-lg",
     attrs: {
@@ -4157,14 +4161,14 @@ var render = function render() {
           var val = "_value" in o ? o._value : o.value;
           return val;
         });
-        _vm.$set(_vm.form, "skills", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        _vm.$set(_vm.form, "skill", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
   }, _vm._l(_vm.addSkills, function (skill) {
     return _c("option", {
-      key: skill.value
+      key: skill.name
     }, [_vm._v("\n                " + _vm._s(skill.name) + "\n            ")]);
-  }), 0), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c("div", {
+  }), 0), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticClass: "w-100 SubSkill"
   }, _vm._l(_vm.subSkills, function (subSkill) {
     return _c("v-card", {
@@ -4172,22 +4176,10 @@ var render = function render() {
       attrs: {
         elevation: "2"
       }
-    }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
+    }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("\n                Skill: " + _vm._s(subSkill.skill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
   }), 1)]);
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "input-group-append"
-  }, [_c("button", {
-    staticClass: "btn btn-success",
-    attrs: {
-      type: "submit",
-      id: "button-addon2"
-    }
-  }, [_vm._v("Add New SubSkill")])]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {

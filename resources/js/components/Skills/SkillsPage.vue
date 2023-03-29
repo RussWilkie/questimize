@@ -7,7 +7,7 @@
       </v-tab-item>
       <v-tab>Subskills</v-tab>
       <v-tab-item>
-        <SubSkillsList :skills="skills"></SubSkillsList>
+        <SubSkillsList :skills="skills" @add="getSkills"></SubSkillsList>
       </v-tab-item>
     </v-tabs>
   </div>

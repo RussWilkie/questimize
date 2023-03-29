@@ -15,7 +15,7 @@ class SubSkillController extends Controller
      */
     public function index()
     {
-        return SubSkill::all();
+        return SubSkill::with('skill')->get();
     }
 
     /**
