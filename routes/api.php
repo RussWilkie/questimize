@@ -37,5 +37,6 @@ Route::resource('quest', QuestController::class);
 Route::resource('objective', ObjectiveController::class);
 Route::resource('skill', SkillController::class);
 Route::resource('subskill', SubSkillController::class);
+Route::resource('skilllog', SkillLogController::class);
 
 Route::post('search','App\Http\Controllers\QuestController@search');
