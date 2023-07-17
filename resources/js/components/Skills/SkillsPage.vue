@@ -15,6 +15,12 @@
       <v-tab-item>
         <SkillLogEntry></SkillLogEntry>
       </v-tab-item>
+        <v-tab>
+          Activities Page
+        </v-tab>
+        <v-tab-item>
+          <Activities></Activities>
+        </v-tab-item>
     </v-tabs>
   </div>
 </template>
@@ -23,6 +29,7 @@
 import SkillsList from './SkillsList.vue';
 import SubSkillsList from './Subskills/SubSkillsList.vue';
 import SkillLogEntry from './SkillLog/SkillLogEntry.vue';
+import Activities from './Activities/ActivitiesList.vue';
 
 export default {
   data() {
@@ -33,7 +40,8 @@ export default {
   components: {
     SkillsList,
     SubSkillsList,
-    SkillLogEntry
+    SkillLogEntry,
+    Activities,
   },
   methods: {
     getSkills() {

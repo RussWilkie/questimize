@@ -15,4 +15,8 @@ class SubSkill extends Model
     public function skill(){
         return $this->belongsTo('App\Models\Skill');
     }
+    
+    public function activities(){
+        return $this->hasMany('App\Models\Activities');
+    }
 }

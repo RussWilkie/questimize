@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SubSkillController;
+use App\Http\Controllers\ActivitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,6 @@ Route::resource('objective', ObjectiveController::class);
 Route::resource('skill', SkillController::class);
 Route::resource('subskill', SubSkillController::class);
 Route::resource('skilllog', SkillLogController::class);
+Route::resource('activities', ActivitiesController::class);
 
 Route::post('search','App\Http\Controllers\QuestController@search');
