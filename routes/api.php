@@ -39,6 +39,10 @@ Route::resource('objective', ObjectiveController::class);
 Route::resource('skill', SkillController::class);
 Route::resource('subskill', SubSkillController::class);
 Route::resource('skilllog', SkillLogController::class);
-Route::resource('activities', ActivitiesController::class);
+
+Route::get('activities/{id}', [ActivitiesController::class, 'show']);
+Route::resource('activities', ActivitiesController::class, ['except' => 'show']);
+
+
 
 Route::post('search','App\Http\Controllers\QuestController@search');

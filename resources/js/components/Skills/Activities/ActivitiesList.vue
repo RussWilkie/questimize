@@ -9,6 +9,9 @@
                 </v-card-title>
                 <v-card-subtitle>XP Value: {{Activity.default_xp_value }}
                 </v-card-subtitle>
+                <v-card-text>
+                    This belongs to the skill: {{ Activity.sub_skills.name }}
+                </v-card-text>
             </v-card>
         </div>
     </div>
@@ -25,7 +28,7 @@
         },
         methods: {
             getActivities() {
-            axios.get('/api/activities').then((res) => {
+            axios.get('/api/activities/' + 1).then((res) => {
                 this.Activities = res.data
             }).catch((error) => {
                 console.log(error)

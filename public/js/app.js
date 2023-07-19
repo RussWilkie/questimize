@@ -2595,7 +2595,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getActivities: function getActivities() {
       var _this = this;
-      axios.get('/api/activities').then(function (res) {
+      axios.get('/api/activities/' + 1).then(function (res) {
         _this.Activities = res.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4067,7 +4067,7 @@ var render = function render() {
       attrs: {
         elevation: "2"
       }
-    }, [_c("v-card-title", [_vm._v(_vm._s(Activity.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("XP Value: " + _vm._s(Activity.default_xp_value) + "\n            ")])], 1);
+    }, [_c("v-card-title", [_vm._v(_vm._s(Activity.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("XP Value: " + _vm._s(Activity.default_xp_value) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("\n                This belongs to the skill: " + _vm._s(Activity.sub_skills.name) + "\n            ")])], 1);
   }), 1)]);
 };
 var staticRenderFns = [];
