@@ -39,17 +39,14 @@
 <script>
 export default {
     props: {
-        skills: Array,
+        skills: [],
     },
     data() {
         return {
             form: new Form({
-                name: '',
-                activities: {
-                    name: 'Session',
-                    name: 'Media Consumed'
-                },
-                xp_earned: 0,
+                name: "",
+                activities: [],
+                xp_earned: Number,
                 date: new Date().toISOString().substr(0, 10)
             }),
             
@@ -59,6 +56,7 @@ export default {
     
     },
     methods: {
+        //Need to revise this to connecto skill logs
         getSkillLogs(){
             axios.get('/api/objective').then((res) => {
                 this.Objectives = res.data

@@ -1,4 +1,3 @@
-
 <template>
     <nav id="vue">
         <div class="menu-item"><router-link to="/">Home</router-link></div>

@@ -47,8 +47,8 @@ export default {
   data() {
     return {
       form: new Form({
-        title: "",
-        category: "Mini-Quest",
+        title: String,
+        category: String
       }),
     };
   },

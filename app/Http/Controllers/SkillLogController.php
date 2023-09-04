@@ -10,7 +10,7 @@ class SkillLogController extends Controller
 
     public function index()
     {
-        return SkillLog::all();
+        return SkillLog::with('activities')->get();
     }
 
   

@@ -42,11 +42,11 @@ export default {
     data() {
         return {
             editmode: false,
-            Objectives: '',
+            Objectives: Object,
             form: new Form({
-                name: '',
-                skill: '',
-                xp_value: '',
+                name: "",
+                skill: "",
+                xp_value: "",
             })
         }
     },

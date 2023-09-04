@@ -3,7 +3,7 @@
         <h1>Skills List</h1>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="skill name"
+                <input v-model="form.name" placeholder="Skill Name"
                     :class="{ 'is-invalid': form.errors.has('name') }" type="text" class="form-control form-control-lg"
                     @keydown="form.errors.clear('name')" aria-label="skill name" aria-describedby="button-addon2">
                 <div class="input-group-append">
@@ -22,7 +22,6 @@
                 <v-card-text>XP: {{skill.xp_earned }} / {{ skill.xp_to_next_level }}
                 </v-card-text>
             </v-card>
-        
         </div>
     </div>
 </template>
@@ -30,7 +29,7 @@
 <script>
 export default {
     props: {
-        skills: Array,
+        skills: [],
     },
     data() {
         return {

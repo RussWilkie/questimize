@@ -26,11 +26,11 @@
 export default {
   data() {
     return {
-      quests: [],
-      questHeaders: [],
-      questsNotStarted: [],
-      questsInProgress: [],
-      questsCompleted: [],
+      quests: Array,
+      questHeaders: Array,
+      questsNotStarted: Array,
+      questsInProgress: Array,
+      questsCompleted: Array,
       statuses: [
         { text: "All Statuses", value: "All Statuses" },
         { text: "Not Started", value: "Not Started" },

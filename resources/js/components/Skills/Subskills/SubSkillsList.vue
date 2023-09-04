@@ -3,9 +3,9 @@
         <h1>SubSkills List</h1>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="SubSkill name" :class="{ 'is-invalid': form.errors.has('name') }"
+                <input v-model="form.name" placeholder="Subskill name" :class="{ 'is-invalid': form.errors.has('name') }"
                     type="text" class="form-control form-control-lg" @keydown="form.errors.clear('name')"
-                    aria-label="SubSkill name" aria-describedby="button-addon2">
+                    aria-label="Subkill name" aria-describedby="button-addon2">
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
@@ -39,7 +39,7 @@
 <script>
 export default {
     props: {
-        skills: Array,
+        skills: [],
     },
     data() {
         return {

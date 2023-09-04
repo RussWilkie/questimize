@@ -9,9 +9,13 @@ class SkillLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sub_skill_id', 'activity', 'xp_value', 'notes'];
+    protected $fillable = ['sub_skill_id', 'activity_id', 'xp_value', 'notes'];
 
     public function subskill(){
         return $this->belongsTo('App\Models\SubSkill');
+    }
+
+    public function activities(){
+        return $this->belongsTo('App\Models\Activities');
     }
 }
