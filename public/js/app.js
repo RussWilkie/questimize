@@ -2585,20 +2585,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    SubSkills: []
+    sub_skills: []
   },
   data: function data() {
     return {
-      Form: new Form({
-        Name: String,
-        XpValue: Number
+      form: new Form({
+        name: '',
+        xp_value: 0,
+        sub_skill: ''
       })
     };
   },
   mounted: function mounted() {},
   methods: {
     saveData: function saveData() {
+      var _this = this;
       var data = new FormData();
+      data.append('name', this.form.name);
+      data.append('default_xp_value', this.form.xp_value);
+      data.append('sub_skill', this.form.sub_skill);
+      axios.post("/api/activities", data).then(function (res) {
+        _this.form.reset();
+        _this.$emit('add');
+      })["catch"](function (error) {
+        _this.form.errors.record(error.response.data.errors);
+      });
     }
   }
 });
@@ -2621,8 +2632,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      Activities: Array,
-      SubSkills: []
+      activities: Array,
+      sub_skills: []
     };
   },
   components: {
@@ -2636,7 +2647,7 @@ __webpack_require__.r(__webpack_exports__);
     getActivities: function getActivities() {
       var _this = this;
       axios.get('/api/activities/' + 1).then(function (res) {
-        _this.Activities = res.data;
+        _this.activities = res.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2644,7 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
     getSubSkills: function getSubSkills() {
       var _this2 = this;
       axios.get('/api/subskill').then(function (res) {
-        _this2.SubSkills = res.data;
+        _this2.sub_skills = res.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4111,10 +4122,10 @@ var render = function render() {
     }
   }, [_c("input", {
     directives: [{
-      name: "mode",
-      rawName: "v-mode",
-      value: _vm.Form.Name,
-      expression: "Form.Name"
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.name,
+      expression: "form.name"
     }],
     staticClass: "form-control form-control-lg",
     attrs: {
@@ -4122,31 +4133,67 @@ var render = function render() {
       placeholder: "Enter name here",
       "aria-label": "Name",
       "aria-describedby": "button-add-activity"
+    },
+    domProps: {
+      value: _vm.form.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "name", $event.target.value);
+      }
     }
   }), _vm._v(" "), _c("input", {
     directives: [{
-      name: "mode",
-      rawName: "v-mode",
-      value: _vm.Form.XpValue,
-      expression: "Form.XpValue"
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.xp_value,
+      expression: "form.xp_value"
     }],
     staticClass: "form-control form-control-lg",
     attrs: {
       type: "number",
+      min: "0",
       placeholder: "0",
       "aria-label": "XP Value",
       "aria-describedby": "button-add-activity"
+    },
+    domProps: {
+      value: _vm.form.xp_value
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "xp_value", $event.target.value);
+      }
     }
   }), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.sub_skill,
+      expression: "form.sub_skill"
+    }],
     staticClass: "form-control form-control-lg",
     attrs: {
       id: "subskills",
       name: "subskills"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.form, "sub_skill", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
     }
-  }, _vm._l(_vm.SubSkills, function (SubSkill) {
+  }, _vm._l(_vm.sub_skills, function (sub_skill) {
     return _c("option", {
-      key: SubSkill.name
-    }, [_vm._v("\n            " + _vm._s(SubSkill.name) + "\n            ")]);
+      key: sub_skill.id
+    }, [_vm._v("\n            " + _vm._s(sub_skill.name) + "\n            ")]);
   }), 0), _vm._v(" "), _vm._m(0)])]);
 };
 var staticRenderFns = [function () {
@@ -4184,17 +4231,20 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("h1", [_vm._v("\n    Activities Page\n")]), _vm._v(" "), _c("ActivitiesEntry", {
     attrs: {
-      SubSkills: _vm.SubSkills
+      sub_skills: _vm.sub_skills
+    },
+    on: {
+      add: _vm.getActivities
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "w-100 Activity"
-  }, _vm._l(_vm.Activities, function (Activity) {
+  }, _vm._l(_vm.activities, function (activity) {
     return _c("v-card", {
-      key: Activity.id,
+      key: activity.id,
       attrs: {
         elevation: "2"
       }
-    }, [_c("v-card-title", [_vm._v(_vm._s(Activity.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("XP Value: " + _vm._s(Activity.default_xp_value) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("\n                This belongs to the skill: " + _vm._s(Activity.sub_skills.name) + "\n            ")])], 1);
+    }, [_c("v-card-title", [_vm._v(_vm._s(activity.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("XP Value: " + _vm._s(activity.default_xp_value) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("\n                This belongs to the skill: " + _vm._s(activity.sub_skills.name) + "\n            ")])], 1);
   }), 1)], 1);
 };
 var staticRenderFns = [];

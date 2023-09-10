@@ -9,7 +9,7 @@ class Activities extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['sub_skill_id'];
+    protected $fillable = ['sub_skill_id', 'name', 'default_xp_value'];
 
     public function subSkills(){
         return $this->belongsTo('App\Models\SubSkill', 'sub_skill_id');
