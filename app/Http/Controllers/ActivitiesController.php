@@ -13,7 +13,7 @@ class ActivitiesController extends Controller
     }
 
     public function show($sub_skill_id){
-        return Activities::with('subSkills')->where('sub_skill_id', '=', $sub_skill_id)->get();
+        return Activities::with('subSkills')->where('sub_skill_id', '=', $sub_skill_id)->orderBy('default_xp_value')->get();
     }
 
     public function store(Request $request){
@@ -29,7 +29,7 @@ class ActivitiesController extends Controller
             ]            
         );
         $data = $request->all();
-        $sub_skill = SubSkill::where('name', '=', $data['sub_skill'])->first();
+        $sub_skill = SubSkill::where('id', '=', $data['sub_skill'])->first();
         $activity = Activities::create($data);
         
         $activity->subSkills()->associate($sub_skill);

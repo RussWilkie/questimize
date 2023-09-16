@@ -3,7 +3,7 @@
     <h1>
         Activities Page
     </h1>
-    <ActivitiesEntry :sub_skills="sub_skills" @add="getActivities"></ActivitiesEntry>
+    <ActivitiesEntry :sub_skills="sub_skills" @get-activities="getActivities"></ActivitiesEntry>
     <div class="w-100 Activity">
             <v-card v-for="activity in activities" :key="activity.id" elevation="2">
                 <v-card-title>{{activity.name}}
@@ -22,8 +22,8 @@ import ActivitiesEntry from './ActivitiesEntry.vue';
     export default {
         data() {
             return {
-                activities: Array,
-                sub_skills: []
+                activities: [],
+                sub_skills: [],
             }
         },
         components: {
@@ -34,9 +34,9 @@ import ActivitiesEntry from './ActivitiesEntry.vue';
             this.getSubSkills();
         },
         methods: {
-            getActivities() {
-            axios.get('/api/activities/' + 1).then((res) => {
-                this.activities = res.data
+            getActivities(sub_skill_id) {
+            axios.get('/api/activities/' + sub_skill_id).then((res) => {
+                this.activities = res.data;
             }).catch((error) => {
                 console.log(error)
             })

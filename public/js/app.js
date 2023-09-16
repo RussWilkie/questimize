@@ -2598,15 +2598,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    selectActivities: function selectActivities(event) {
+      this.$emit('get-activities', event.target.value);
+    },
     saveData: function saveData() {
       var _this = this;
       var data = new FormData();
+      var selectedSubSkill = this.form.sub_skill;
       data.append('name', this.form.name);
       data.append('default_xp_value', this.form.xp_value);
-      data.append('sub_skill', this.form.sub_skill);
+      data.append('sub_skill', selectedSubSkill);
       axios.post("/api/activities", data).then(function (res) {
+        _this.$emit('get-activities', _this.form.sub_skill);
         _this.form.reset();
-        _this.$emit('add');
+        _this.form.sub_skill = selectedSubSkill;
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
       });
@@ -2632,7 +2637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      activities: Array,
+      activities: [],
       sub_skills: []
     };
   },
@@ -2644,9 +2649,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getSubSkills();
   },
   methods: {
-    getActivities: function getActivities() {
+    getActivities: function getActivities(sub_skill_id) {
       var _this = this;
-      axios.get('/api/activities/' + 1).then(function (res) {
+      axios.get('/api/activities/' + sub_skill_id).then(function (res) {
         _this.activities = res.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4180,7 +4185,7 @@ var render = function render() {
       name: "subskills"
     },
     on: {
-      change: function change($event) {
+      change: [function ($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
           return o.selected;
         }).map(function (o) {
@@ -4188,11 +4193,16 @@ var render = function render() {
           return val;
         });
         _vm.$set(_vm.form, "sub_skill", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-      }
+      }, function ($event) {
+        return _vm.selectActivities($event);
+      }]
     }
   }, _vm._l(_vm.sub_skills, function (sub_skill) {
     return _c("option", {
-      key: sub_skill.id
+      key: sub_skill.id,
+      domProps: {
+        value: sub_skill.id
+      }
     }, [_vm._v("\n            " + _vm._s(sub_skill.name) + "\n            ")]);
   }), 0), _vm._v(" "), _vm._m(0)])]);
 };
@@ -4234,7 +4244,7 @@ var render = function render() {
       sub_skills: _vm.sub_skills
     },
     on: {
-      add: _vm.getActivities
+      "get-activities": _vm.getActivities
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "w-100 Activity"
