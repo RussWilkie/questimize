@@ -9,7 +9,7 @@
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
             <select v-model="form.skill" id="skills" class="form-control form-control-lg" name="skills">
-                <option v-for="skill in addSkills" :key="skill.name">
+                <option v-for="skill in addSkills" :key="skill.id" :value="skill.id">
                     {{ skill.name }}
                 </option>
             </select>

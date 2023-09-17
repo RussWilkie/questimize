@@ -49,7 +49,7 @@ class SubSkillController extends Controller
         );
 
         $data = $request->all();
-        $skill = Skill::where('name', '=', $data['skill'])->first();
+        $skill = Skill::where('id', '=', $data['skill'])->first();
         $subSkill= SubSkill::create($request->all());
         $subSkill->skill()->associate($skill);
         $subSkill->save();

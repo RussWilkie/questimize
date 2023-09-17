@@ -4631,7 +4631,10 @@ var render = function render() {
     }
   }, _vm._l(_vm.addSkills, function (skill) {
     return _c("option", {
-      key: skill.name
+      key: skill.id,
+      domProps: {
+        value: skill.id
+      }
     }, [_vm._v("\n                " + _vm._s(skill.name) + "\n            ")]);
   }), 0), _vm._v(" "), _vm._m(0)])]);
 };
@@ -4668,14 +4671,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("SubSkillsEntry", {
+  return _c("div", [_c("SubSkillsEntry", {
     attrs: {
       skills: _vm.skills
     },
     on: {
       "get-sub-skills": _vm.getSubSkills
     }
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("div", {
     staticClass: "w-100 SubSkill"
   }, _vm._l(_vm.subSkills, function (subSkill) {
     return _c("v-card", {
