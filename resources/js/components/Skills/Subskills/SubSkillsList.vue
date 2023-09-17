@@ -1,25 +1,7 @@
 <template>
     <div>
         <h1>SubSkills List</h1>
-        <form @submit.prevent="saveData">
-            <div class="input-group mb-3 w-100">
-                <input v-model="form.name" placeholder="Subskill name" :class="{ 'is-invalid': form.errors.has('name') }"
-                    type="text" class="form-control form-control-lg" @keydown="form.errors.clear('name')"
-                    aria-label="Subkill name" aria-describedby="button-addon2">
-            </div>
-            <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
-                v-text="form.errors.get('name')"></span>
-            <select v-model="form.skill" id="skills" class="form-control form-control-lg" name="skills">
-                <option v-for="skill in addSkills" :key="skill.name">
-                    {{ skill.name }}
-                </option>
-            </select>
-            <div class="input-group-append">
-                <button class="btn btn-success" type="submit" id="button-addon2">
-                    Add this to your list
-                </button>
-            </div>
-        </form>
+        <SubSkillsEntry :skills="skills" @get-sub-skills="getSubSkills"></SubSkillsEntry>
         <div class="w-100 SubSkill">
             <v-card v-for="subSkill in subSkills" :key="subSkill.id" elevation="2">
                 <v-card-title>{{ subSkill.name }}
@@ -37,81 +19,31 @@
 </template>
 
 <script>
+import SubSkillsEntry from './SubSkillsEntry.vue';
+
 export default {
     props: {
-        skills: [],
+        skills: []
+    },
+    components: {
+        SubSkillsEntry
     },
     data() {
         return {
-            subSkills: '',
-            form: new Form({
-                name: '',
-                skill: 'Adventuring',
-            })
-        }
-    },
-    computed: {
-        addSkills: function () {
-            return this.skills.filter((skill) => {
-                return skill.name != "";
-            });
-        },
-    },
-    methods: {
-        deleteSubSkill(e) {
-            let data = new FormData();
-            data.append('_method', 'DELETE')
-            axios.post('/api/subskill/' + e.id, data).then((res) => {
-                this.subSkills = res.data
-            }).catch((error) => {
-                this.form.errors.record(error.response.data.errors)
-            })
-        },
-        updateSubSkill(e) {
-            this.editmode = false
-            let data = new FormData();
-            data.append('_method', 'PATCH')
-            data.append('name', e.name)
-            data.append('skill', e.skill)
-            axios.post('/api/subskill/' + e.id, data)
-                .catch((error) => {
-                    this.form.errors.record(error.response.data.errors)
-                })
-        },
-        toggleSubSkill(e) {
-            e.completed = !e.completed
-            let data = new FormData();
-            data.append('_method', 'PATCH')
-            if (e.completed == true) {
-                data.append('completed', 1);
-            }
-            if (e.completed == false) {
-                data.append('completed', 0)
-            }
-            axios.post('/api/subskill/' + e.id, data)
-        },
-        getSubSkills() {
-            axios.get('/api/subskill').then((res) => {
-                this.subSkills = res.data
-            }).catch((error) => {
-                console.log(error)
-            })
-        },
-        saveData() {
-            let data = new FormData();
-            data.append('name', this.form.name)
-            data.append('skill', this.form.skill)
-            axios.post('/api/subskill', data).then((res) => {
-                this.form.reset();
-                this.getSubSkills();
-                this.form.skill = this.form.skill;
-            }).catch((error) => {
-                this.form.errors.record(error.response.data.errors)
-            })
-        }
+            subSkills: [],
+        };
     },
     mounted() {
-        this.getSubSkills()
-    }
+        this.getSubSkills();
+    },
+    methods: {
+        getSubSkills() {
+            axios.get('/api/subskill').then((res) => {
+                this.subSkills = res.data;
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    },
 }
 </script>

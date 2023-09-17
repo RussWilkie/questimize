@@ -2596,7 +2596,6 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  mounted: function mounted() {},
   methods: {
     selectActivities: function selectActivities(event) {
       this.$emit('get-activities', event.target.value);
@@ -2833,10 +2832,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2850,7 +2849,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      subSkills: '',
       form: new Form({
         name: '',
         skill: 'Adventuring'
@@ -2865,63 +2863,62 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    deleteSubSkill: function deleteSubSkill(e) {
+    saveData: function saveData() {
       var _this = this;
       var data = new FormData();
-      data.append('_method', 'DELETE');
-      axios.post('/api/subskill/' + e.id, data).then(function (res) {
-        _this.subSkills = res.data;
+      var skill = this.form.skill;
+      data.append('name', this.form.name);
+      data.append('skill', skill);
+      axios.post('/api/subskill', data).then(function (res) {
+        _this.form.reset();
+        _this.$emit('get-sub-skills');
+        _this.form.skill = skill;
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
       });
-    },
-    updateSubSkill: function updateSubSkill(e) {
-      var _this2 = this;
-      this.editmode = false;
-      var data = new FormData();
-      data.append('_method', 'PATCH');
-      data.append('name', e.name);
-      data.append('skill', e.skill);
-      axios.post('/api/subskill/' + e.id, data)["catch"](function (error) {
-        _this2.form.errors.record(error.response.data.errors);
-      });
-    },
-    toggleSubSkill: function toggleSubSkill(e) {
-      e.completed = !e.completed;
-      var data = new FormData();
-      data.append('_method', 'PATCH');
-      if (e.completed == true) {
-        data.append('completed', 1);
-      }
-      if (e.completed == false) {
-        data.append('completed', 0);
-      }
-      axios.post('/api/subskill/' + e.id, data);
-    },
-    getSubSkills: function getSubSkills() {
-      var _this3 = this;
-      axios.get('/api/subskill').then(function (res) {
-        _this3.subSkills = res.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    saveData: function saveData() {
-      var _this4 = this;
-      var data = new FormData();
-      data.append('name', this.form.name);
-      data.append('skill', this.form.skill);
-      axios.post('/api/subskill', data).then(function (res) {
-        _this4.form.reset();
-        _this4.getSubSkills();
-        _this4.form.skill = _this4.form.skill;
-      })["catch"](function (error) {
-        _this4.form.errors.record(error.response.data.errors);
-      });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubSkillsEntry_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubSkillsEntry.vue */ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    skills: []
+  },
+  components: {
+    SubSkillsEntry: _SubSkillsEntry_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      subSkills: []
+    };
   },
   mounted: function mounted() {
     this.getSubSkills();
+  },
+  methods: {
+    getSubSkills: function getSubSkills() {
+      var _this = this;
+      axios.get('/api/subskill').then(function (res) {
+        _this.subSkills = res.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -4118,7 +4115,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("\n        Skills Entry Component\n    ")]), _vm._v(" "), _c("form", {
+  return _c("div", [_c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -4548,10 +4545,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=template&id=4e5154b1&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=template&id=4e5154b1& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4563,7 +4560,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("form", {
+  return _c("div", [_c("h1", [_vm._v("Subskills Component")]), _vm._v(" "), _c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -4636,16 +4633,7 @@ var render = function render() {
     return _c("option", {
       key: skill.name
     }, [_vm._v("\n                " + _vm._s(skill.name) + "\n            ")]);
-  }), 0), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
-    staticClass: "w-100 SubSkill"
-  }, _vm._l(_vm.subSkills, function (subSkill) {
-    return _c("v-card", {
-      key: subSkill.id,
-      attrs: {
-        elevation: "2"
-      }
-    }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("\n                Skill: " + _vm._s(subSkill.skill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
-  }), 1)]);
+  }), 0), _vm._v(" "), _vm._m(0)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -4660,6 +4648,45 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("\n                Add this to your list\n            ")])]);
 }];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=template&id=4e5154b1&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=template&id=4e5154b1& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("SubSkillsEntry", {
+    attrs: {
+      skills: _vm.skills
+    },
+    on: {
+      "get-sub-skills": _vm.getSubSkills
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "w-100 SubSkill"
+  }, _vm._l(_vm.subSkills, function (subSkill) {
+    return _c("v-card", {
+      key: subSkill.id,
+      attrs: {
+        elevation: "2"
+      }
+    }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("\n                Skill: " + _vm._s(subSkill.skill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
+  }), 1)], 1);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -41507,6 +41534,45 @@ component.options.__file = "resources/js/components/Skills/SkillsPage.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsEntry.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubSkillsEntry.vue?vue&type=template&id=aa465e22& */ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22&");
+/* harmony import */ var _SubSkillsEntry_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubSkillsEntry.vue?vue&type=script&lang=js& */ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SubSkillsEntry_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Skills/Subskills/SubSkillsEntry.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Skills/Subskills/SubSkillsList.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/components/Skills/Subskills/SubSkillsList.vue ***!
@@ -41824,6 +41890,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsEntry_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubSkillsEntry.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsEntry_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/Skills/Subskills/SubSkillsList.vue?vue&type=script&lang=js& ***!
@@ -42107,6 +42189,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SkillsPage_vue_vue_type_template_id_4598d423___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SkillsPage_vue_vue_type_template_id_4598d423___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SkillsPage.vue?vue&type=template&id=4598d423& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/SkillsPage.vue?vue&type=template&id=4598d423&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsEntry_vue_vue_type_template_id_aa465e22___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubSkillsEntry.vue?vue&type=template&id=aa465e22& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=template&id=aa465e22&");
 
 
 /***/ }),

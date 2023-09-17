@@ -1,8 +1,5 @@
 <template>
     <div>
-        <h1>
-            Skills Entry Component
-        </h1>
         <form @submit.prevent="saveData">
             <input v-model="form.name" type="text" placeholder="Enter name here" class="form-control form-control-lg" aria-label="Name" aria-describedby="button-add-activity">
             <input v-model="form.xp_value" type="number" min="0" placeholder="0" class="form-control form-control-lg" aria-label="XP Value" aria-describedby="button-add-activity">
@@ -32,8 +29,6 @@ export default {
                 sub_skill: '',
             }),
         };
-    },
-    mounted() {
     },
     methods: {
         selectActivities(event){
