@@ -4236,7 +4236,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("\n    Activities Page\n")]), _vm._v(" "), _c("ActivitiesEntry", {
+  return _c("div", [_c("h1", [_vm._v("\n    Activities List\n")]), _vm._v(" "), _c("ActivitiesEntry", {
     attrs: {
       sub_skills: _vm.sub_skills
     },
@@ -4560,7 +4560,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Subskills Component")]), _vm._v(" "), _c("form", {
+  return _c("div", [_c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Subskills Component</h1>
         <form @submit.prevent="saveData">
             <div class="input-group mb-3 w-100">
                 <input v-model="form.name" placeholder="Subskill name" :class="{ 'is-invalid': form.errors.has('name') }"

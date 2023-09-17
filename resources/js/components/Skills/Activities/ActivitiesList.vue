@@ -1,7 +1,7 @@
 <template>
     <div>
     <h1>
-        Activities Page
+        Activities List
     </h1>
     <ActivitiesEntry :sub_skills="sub_skills" @get-activities="getActivities"></ActivitiesEntry>
     <div class="w-100 Activity">
