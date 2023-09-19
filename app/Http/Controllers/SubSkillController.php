@@ -61,9 +61,9 @@ class SubSkillController extends Controller
      * @param  \App\Models\SubSkill  $subSkill
      * @return \Illuminate\Http\Response
      */
-    public function show(SubSkill $subSkill)
+    public function show($skillID)
     {
-        //
+        return SubSkill::with('skill')->where('skill_id','=',$skillID)->orderBy('name')->get();
     }
 
     /**

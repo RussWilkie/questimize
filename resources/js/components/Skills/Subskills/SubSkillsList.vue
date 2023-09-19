@@ -3,7 +3,7 @@
         <SubSkillsEntry :skills="skills" @get-sub-skills="getSubSkills"></SubSkillsEntry>
         <h1>SubSkills List</h1>
         <div class="w-100 SubSkill">
-            <v-card v-for="subSkill in subSkills" :key="subSkill.id" elevation="2">
+            <v-card v-for="subSkill in subSkills" :key="subSkill.id" :value="subSkill.id" elevation="2">
                 <v-card-title>{{ subSkill.name }}
                 </v-card-title>
                 <v-card-subtitle>
@@ -37,8 +37,8 @@ export default {
         this.getSubSkills();
     },
     methods: {
-        getSubSkills() {
-            axios.get('/api/subskill').then((res) => {
+        getSubSkills(skill_id) {
+            axios.get('/api/subskill/' + skill_id).then((res) => {
                 this.subSkills = res.data;
             }).catch((error) => {
                 console.log(error);

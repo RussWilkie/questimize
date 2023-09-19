@@ -12,8 +12,8 @@ class ActivitiesController extends Controller
         return Activities::all();
     }
 
-    public function show($sub_skill_id){
-        return Activities::with('subSkills')->where('sub_skill_id', '=', $sub_skill_id)->orderBy('default_xp_value')->get();
+    public function show($subSkillID){
+        return Activities::with('subSkills')->where('sub_skill_id', '=', $subSkillID)->orderBy('default_xp_value')->get();
     }
 
     public function store(Request $request){

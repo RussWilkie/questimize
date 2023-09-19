@@ -38,6 +38,7 @@ Route::resource('quest', QuestController::class);
 Route::resource('objective', ObjectiveController::class);
 Route::resource('skill', SkillController::class);
 Route::resource('subskill', SubSkillController::class);
+Route::get('subskill/{id}', [SubSkillController::class, 'show']);
 Route::resource('skilllog', SkillLogController::class);
 
 Route::get('activities/{id}', [ActivitiesController::class, 'show']);

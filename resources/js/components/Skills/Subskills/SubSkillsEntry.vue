@@ -8,7 +8,7 @@
             </div>
             <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('name')"
                 v-text="form.errors.get('name')"></span>
-            <select v-model="form.skill" id="skills" class="form-control form-control-lg" name="skills">
+            <select v-model="form.skill" @change="selectSkills($event)" id="skills" class="form-control form-control-lg" name="skills">
                 <option v-for="skill in addSkills" :key="skill.id" :value="skill.id">
                     {{ skill.name }}
                 </option>
@@ -30,7 +30,7 @@ export default{
         return {
             form: new Form({
                 name: '',
-                skill: 'Adventuring',
+                skill: [],
             }),
         };
     },
@@ -42,14 +42,19 @@ export default{
         },
     },
     methods: {
+        selectSkills(event){
+            this.$emit('get-sub-skills', event.target.value)
+        },
         saveData() {
             let data = new FormData();
             let skill = this.form.skill;
             data.append('name', this.form.name);
             data.append('skill', skill);
+            console.log('skill id');
+            console.log(skill);
             axios.post('/api/subskill', data).then((res) => {
                 this.form.reset();
-                this.$emit('get-sub-skills');
+                this.$emit('get-sub-skills', skill);
                 this.form.skill = skill;
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors);

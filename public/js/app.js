@@ -2851,7 +2851,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: new Form({
         name: '',
-        skill: 'Adventuring'
+        skill: []
       })
     };
   },
@@ -2863,15 +2863,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    selectSkills: function selectSkills(event) {
+      this.$emit('get-sub-skills', event.target.value);
+    },
     saveData: function saveData() {
       var _this = this;
       var data = new FormData();
       var skill = this.form.skill;
       data.append('name', this.form.name);
       data.append('skill', skill);
+      console.log('skill id');
+      console.log(skill);
       axios.post('/api/subskill', data).then(function (res) {
         _this.form.reset();
-        _this.$emit('get-sub-skills');
+        _this.$emit('get-sub-skills', skill);
         _this.form.skill = skill;
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
@@ -2911,9 +2916,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getSubSkills();
   },
   methods: {
-    getSubSkills: function getSubSkills() {
+    getSubSkills: function getSubSkills(skill_id) {
       var _this = this;
-      axios.get('/api/subskill').then(function (res) {
+      axios.get('/api/subskill/' + skill_id).then(function (res) {
         _this.subSkills = res.data;
       })["catch"](function (error) {
         console.log(error);
@@ -4619,7 +4624,7 @@ var render = function render() {
       name: "skills"
     },
     on: {
-      change: function change($event) {
+      change: [function ($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
           return o.selected;
         }).map(function (o) {
@@ -4627,7 +4632,9 @@ var render = function render() {
           return val;
         });
         _vm.$set(_vm.form, "skill", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-      }
+      }, function ($event) {
+        return _vm.selectSkills($event);
+      }]
     }
   }, _vm._l(_vm.addSkills, function (skill) {
     return _c("option", {
@@ -4684,6 +4691,7 @@ var render = function render() {
     return _c("v-card", {
       key: subSkill.id,
       attrs: {
+        value: subSkill.id,
         elevation: "2"
       }
     }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("\n                Skill: " + _vm._s(subSkill.skill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
