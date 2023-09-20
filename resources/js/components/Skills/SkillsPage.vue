@@ -7,7 +7,7 @@
       </v-tab-item>
       <v-tab>Subskills</v-tab>
       <v-tab-item>
-        <SubSkillsList :skills="skills"></SubSkillsList>
+        <SubSkillsComponent :skills="skills" @get-skills="getSkills"></SubSkillsComponent>
       </v-tab-item>
         <v-tab>
           Skill Log
@@ -27,7 +27,7 @@
 
 <script>
 import SkillsList from './SkillsList.vue';
-import SubSkillsList from './Subskills/SubSkillsList.vue';
+import SubSkillsComponent from './Subskills/SubSkillsComponent.vue';
 import SkillLogEntry from './SkillLog/SkillLogEntry.vue';
 import Activities from './Activities/ActivitiesList.vue';
 
@@ -39,7 +39,7 @@ export default {
   },
   components: {
     SkillsList,
-    SubSkillsList,
+    SubSkillsComponent,
     SkillLogEntry,
     Activities,
   },

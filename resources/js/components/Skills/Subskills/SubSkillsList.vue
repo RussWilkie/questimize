@@ -1,6 +1,5 @@
 <template>
     <div>
-        <SubSkillsEntry :skills="skills" @get-sub-skills="getSubSkills"></SubSkillsEntry>
         <h1>SubSkills List</h1>
         <div class="w-100 SubSkill">
             <v-card v-for="subSkill in subSkills" :key="subSkill.id" :value="subSkill.id" elevation="2">

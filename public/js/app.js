@@ -2796,7 +2796,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _SkillsList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SkillsList.vue */ "./resources/js/components/Skills/SkillsList.vue");
-/* harmony import */ var _Subskills_SubSkillsList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Subskills/SubSkillsList.vue */ "./resources/js/components/Skills/Subskills/SubSkillsList.vue");
+/* harmony import */ var _Subskills_SubSkillsComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Subskills/SubSkillsComponent.vue */ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue");
 /* harmony import */ var _SkillLog_SkillLogEntry_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SkillLog/SkillLogEntry.vue */ "./resources/js/components/Skills/SkillLog/SkillLogEntry.vue");
 /* harmony import */ var _Activities_ActivitiesList_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Activities/ActivitiesList.vue */ "./resources/js/components/Skills/Activities/ActivitiesList.vue");
 
@@ -2811,7 +2811,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     SkillsList: _SkillsList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SubSkillsList: _Subskills_SubSkillsList_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SubSkillsComponent: _Subskills_SubSkillsComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     SkillLogEntry: _SkillLog_SkillLogEntry_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Activities: _Activities_ActivitiesList_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
@@ -2828,6 +2828,34 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getSkills();
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubSkillsEntry_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubSkillsEntry.vue */ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue");
+/* harmony import */ var _SubSkillsList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubSkillsList.vue */ "./resources/js/components/Skills/Subskills/SubSkillsList.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    SubSkillsEntry: _SubSkillsEntry_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    SubSkillsList: _SubSkillsList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    skills: []
+  },
+  emits: ['get-sub-skills']
 });
 
 /***/ }),
@@ -2864,7 +2892,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectSkills: function selectSkills(event) {
-      this.$emit('get-sub-skills', event.target.value);
+      this.$parent.$emit('get-sub-skills', event.target.value);
     },
     saveData: function saveData() {
       var _this = this;
@@ -2876,7 +2904,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(skill);
       axios.post('/api/subskill', data).then(function (res) {
         _this.form.reset();
-        _this.$emit('get-sub-skills', skill);
+        _this.$parent.$emit('get-sub-skills', skill);
         _this.form.skill = skill;
       })["catch"](function (error) {
         _this.form.errors.record(error.response.data.errors);
@@ -4541,11 +4569,45 @@ var render = function render() {
     on: {
       "get-skills": _vm.getSkills
     }
-  })], 1), _vm._v(" "), _c("v-tab", [_vm._v("Subskills")]), _vm._v(" "), _c("v-tab-item", [_c("SubSkillsList", {
+  })], 1), _vm._v(" "), _c("v-tab", [_vm._v("Subskills")]), _vm._v(" "), _c("v-tab-item", [_c("SubSkillsComponent", {
+    attrs: {
+      skills: _vm.skills
+    },
+    on: {
+      "get-skills": _vm.getSkills
+    }
+  })], 1), _vm._v(" "), _c("v-tab", [_vm._v("\n        Skill Log\n      ")]), _vm._v(" "), _c("v-tab-item", [_c("SkillLogEntry")], 1), _vm._v(" "), _c("v-tab", [_vm._v("\n        Activities Page\n      ")]), _vm._v(" "), _c("v-tab-item", [_c("Activities")], 1)], 1)], 1);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("SubSkillsEntry", {
     attrs: {
       skills: _vm.skills
     }
-  })], 1), _vm._v(" "), _c("v-tab", [_vm._v("\n        Skill Log\n      ")]), _vm._v(" "), _c("v-tab-item", [_c("SkillLogEntry")], 1), _vm._v(" "), _c("v-tab", [_vm._v("\n        Activities Page\n      ")]), _vm._v(" "), _c("v-tab-item", [_c("Activities")], 1)], 1)], 1);
+  }), _vm._v(" "), _c("SubSkillsList", {
+    attrs: {
+      skills: _vm.skills
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -4681,14 +4743,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("SubSkillsEntry", {
-    attrs: {
-      skills: _vm.skills
-    },
-    on: {
-      "get-sub-skills": _vm.getSubSkills
-    }
-  }), _vm._v(" "), _c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("div", {
+  return _c("div", [_c("h1", [_vm._v("SubSkills List")]), _vm._v(" "), _c("div", {
     staticClass: "w-100 SubSkill"
   }, _vm._l(_vm.subSkills, function (subSkill) {
     return _c("v-card", {
@@ -4698,7 +4753,7 @@ var render = function render() {
         elevation: "2"
       }
     }, [_c("v-card-title", [_vm._v(_vm._s(subSkill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("\n                Skill: " + _vm._s(subSkill.skill.name) + "\n            ")]), _vm._v(" "), _c("v-card-subtitle", [_vm._v("Level: " + _vm._s(subSkill.level) + "\n            ")]), _vm._v(" "), _c("v-card-text", [_vm._v("XP: " + _vm._s(subSkill.xp_earned) + " / " + _vm._s(subSkill.xp_to_next_level) + "\n            ")])], 1);
-  }), 1)], 1);
+  }), 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -41548,6 +41603,45 @@ component.options.__file = "resources/js/components/Skills/SkillsPage.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsComponent.vue ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubSkillsComponent.vue?vue&type=template&id=2c41ad7a& */ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a&");
+/* harmony import */ var _SubSkillsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubSkillsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SubSkillsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Skills/Subskills/SubSkillsComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Skills/Subskills/SubSkillsEntry.vue ***!
@@ -41904,6 +41998,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubSkillsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/Skills/Subskills/SubSkillsEntry.vue?vue&type=script&lang=js& ***!
@@ -42203,6 +42313,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SkillsPage_vue_vue_type_template_id_4598d423___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SkillsPage_vue_vue_type_template_id_4598d423___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SkillsPage.vue?vue&type=template&id=4598d423& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/SkillsPage.vue?vue&type=template&id=4598d423&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a& ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SubSkillsComponent_vue_vue_type_template_id_2c41ad7a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SubSkillsComponent.vue?vue&type=template&id=2c41ad7a& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Skills/Subskills/SubSkillsComponent.vue?vue&type=template&id=2c41ad7a&");
 
 
 /***/ }),

@@ -43,7 +43,7 @@ export default{
     },
     methods: {
         selectSkills(event){
-            this.$emit('get-sub-skills', event.target.value)
+            this.$parent.$emit('get-sub-skills', event.target.value)
         },
         saveData() {
             let data = new FormData();
@@ -54,7 +54,7 @@ export default{
             console.log(skill);
             axios.post('/api/subskill', data).then((res) => {
                 this.form.reset();
-                this.$emit('get-sub-skills', skill);
+                this.$parent.$emit('get-sub-skills', skill);
                 this.form.skill = skill;
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors);
