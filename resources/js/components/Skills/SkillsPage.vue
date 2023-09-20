@@ -3,7 +3,7 @@
     <v-tabs>
       <v-tab>Skills</v-tab>
       <v-tab-item>
-        <SkillsList :skills="skills"></SkillsList>
+        <SkillsList :skills="skills" @get-skills="getSkills"></SkillsList>
       </v-tab-item>
       <v-tab>Subskills</v-tab>
       <v-tab-item>

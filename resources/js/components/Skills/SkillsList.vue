@@ -33,7 +33,6 @@ export default {
     },
     data() {
         return {
-            editmode: false,
             form: new Form({
                 name: '',
             })
@@ -73,10 +72,11 @@ export default {
         },
         saveData() {
             let data = new FormData();
+            console.log(data);
             data.append('name', this.form.name)
             axios.post('/api/skill', data).then((res) => {
                 this.form.reset()
-                this.getSkills()
+                this.$emit('get-skills')
             }).catch((error) => {
                 this.form.errors.record(error.response.data.errors)
             })

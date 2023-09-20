@@ -2729,7 +2729,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      editmode: false,
       form: new Form({
         name: ''
       })
@@ -2771,10 +2770,11 @@ __webpack_require__.r(__webpack_exports__);
     saveData: function saveData() {
       var _this3 = this;
       var data = new FormData();
+      console.log(data);
       data.append('name', this.form.name);
       axios.post('/api/skill', data).then(function (res) {
         _this3.form.reset();
-        _this3.getSkills();
+        _this3.$emit('get-skills');
       })["catch"](function (error) {
         _this3.form.errors.record(error.response.data.errors);
       });
@@ -4537,6 +4537,9 @@ var render = function render() {
   return _c("div", [_c("v-tabs", [_c("v-tab", [_vm._v("Skills")]), _vm._v(" "), _c("v-tab-item", [_c("SkillsList", {
     attrs: {
       skills: _vm.skills
+    },
+    on: {
+      "get-skills": _vm.getSkills
     }
   })], 1), _vm._v(" "), _c("v-tab", [_vm._v("Subskills")]), _vm._v(" "), _c("v-tab-item", [_c("SubSkillsList", {
     attrs: {
